@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THL Schedule — Mar 15–27, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0e12;
+    --surface: #151820;
+    --surface-raised: #1c2029;
+    --surface-hover: #232830;
+    --border: #2a2f3a;
+    --border-light: #363c4a;
+    --text: #e8eaf0;
+    --text-dim: #8891a4;
+    --text-muted: #555d70;
+    --accent: #f0c040;
+
+    --mele: #e06040;
+    --mele-bg: rgba(224, 96, 64, 0.12);
+    --mele-border: rgba(224, 96, 64, 0.35);
+
+    --ricca: #50b8e0;
+    --ricca-bg: rgba(80, 184, 224, 0.12);
+    --ricca-border: rgba(80, 184, 224, 0.35);
+
+    --jaz: #c078e0;
+    --jaz-bg: rgba(192, 120, 224, 0.12);
+    --jaz-border: rgba(192, 120, 224, 0.35);
+
+    --mae: #60d0a0;
+    --mae-bg: rgba(96, 208, 160, 0.12);
+    --mae-border: rgba(96, 208, 160, 0.35);
+
+    --may: #e8a050;
+    --may-bg: rgba(232, 160, 80, 0.12);
+    --may-border: rgba(232, 160, 80, 0.35);
+
+    --lucia: #e070a0;
+    --lucia-bg: rgba(224, 112, 160, 0.12);
+    --lucia-border: rgba(224, 112, 160, 0.35);
+
+    --ot-color: #f05050;
+    --rt-color: #50c878;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    overflow-x: auto;
+  }
+
+  /* === NOISE TEXTURE === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 32px 40px 60px;
+  }
+
+  /* === HEADER === */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-left { display: flex; flex-direction: column; gap: 6px; }
+
+  .facility-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .facility-tag::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  .header h1 span {
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .period-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(240, 192, 64, 0.1);
+    border: 1px solid rgba(240, 192, 64, 0.3);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 4px;
+  }
+
+  .status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* === STAFF LEGEND === */
+  .legend {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .legend-item:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-light);
+    transform: translateY(-1px);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .legend-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* === SCHEDULE GRID === */
+  .week-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 8px;
+  }
+
+  .week-label:not(:first-of-type) {
+    margin-top: 32px;
+  }
+
+  .grid-wrapper {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+    margin-bottom: 8px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 170px repeat(7, 1fr);
+    min-width: 900px;
+  }
+
+  .grid-header {
+    display: contents;
+  }
+
+  .grid-header .cell {
+    background: var(--surface-raised);
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 14px 12px;
+    text-align: center;
+  }
+
+  .grid-header .cell:first-child {
+    text-align: left;
+    padding-left: 20px;
+    border-right: 1px solid var(--border);
+  }
+
+  .grid-header .cell .date-num {
+    display: block;
+    font-size: 18px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 2px;
+    letter-spacing: -0.5px;
+  }
+
+  .grid-header .cell.today {
+    background: rgba(240, 192, 64, 0.08);
+  }
+
+  .grid-header .cell.today .date-num {
+    color: var(--accent);
+  }
+
+  .grid-row {
+    display: contents;
+  }
+
+  .grid-row .cell {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    position: relative;
+    transition: background 0.15s;
+  }
+
+  .grid-row:last-child .cell {
+    border-bottom: none;
+  }
+
+  .grid-row .cell:first-child {
+    text-align: left;
+    padding: 10px 20px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .grid-row .cell:not(:first-child):hover {
+    background: var(--surface-hover);
+  }
+
+  .staff-indicator {
+    width: 4px;
+    height: 28px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .staff-info { display: flex; flex-direction: column; }
+
+  .staff-name {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .staff-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+  }
+
+  /* Shift blocks */
+  .shift-block {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .shift-block:hover {
+    transform: scale(1.08);
+  }
+
+  .shift-block.has-ot {
+    position: relative;
+  }
+
+  .shift-block.has-ot::after {
+    content: 'OT';
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: var(--ot-color);
+    color: #fff;
+    padding: 1px 4px;
+    border-radius: 3px;
+    line-height: 1.3;
+  }
+
+  .shift-off {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.3;
+    letter-spacing: 1px;
+  }
+
+  /* Staff color classes */
+  .s-mele .shift-block { background: var(--mele-bg); border-color: var(--mele-border); color: var(--mele); }
+  .s-ricca .shift-block { background: var(--ricca-bg); border-color: var(--ricca-border); color: var(--ricca); }
+  .s-jaz .shift-block { background: var(--jaz-bg); border-color: var(--jaz-border); color: var(--jaz); }
+  .s-mae .shift-block { background: var(--mae-bg); border-color: var(--mae-border); color: var(--mae); }
+  .s-may .shift-block { background: var(--may-bg); border-color: var(--may-border); color: var(--may); }
+  .s-lucia .shift-block { background: var(--lucia-bg); border-color: var(--lucia-border); color: var(--lucia); }
+
+  .s-mele .staff-indicator { background: var(--mele); }
+  .s-ricca .staff-indicator { background: var(--ricca); }
+  .s-jaz .staff-indicator { background: var(--jaz); }
+  .s-mae .staff-indicator { background: var(--mae); }
+  .s-may .staff-indicator { background: var(--may); }
+  .s-lucia .staff-indicator { background: var(--lucia); }
+
+  .s-mele .staff-name { color: var(--mele); }
+  .s-ricca .staff-name { color: var(--ricca); }
+  .s-jaz .staff-name { color: var(--jaz); }
+  .s-mae .staff-name { color: var(--mae); }
+  .s-may .staff-name { color: var(--may); }
+  .s-lucia .staff-name { color: var(--lucia); }
+
+  /* Daily totals row */
+  .grid-totals {
+    display: contents;
+  }
+
+  .grid-totals .cell {
+    padding: 12px 8px;
+    text-align: center;
+    background: var(--surface-raised);
+    border-top: 2px solid var(--border-light);
+  }
+
+  .grid-totals .cell:first-child {
+    text-align: left;
+    padding-left: 20px;
+    border-right: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+  }
+
+  .daily-total {
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .daily-total .label {
+    display: block;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  /* === SUMMARY CARDS === */
+  .summary-section {
+    margin-top: 40px;
+  }
+
+  .summary-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  }
+
+  .summary-card:hover {
+    border-color: var(--border-light);
+    background: var(--surface-raised);
+  }
+
+  .summary-card.c-mele::before { background: var(--mele); }
+  .summary-card.c-ricca::before { background: var(--ricca); }
+  .summary-card.c-jaz::before { background: var(--jaz); }
+  .summary-card.c-mae::before { background: var(--mae); }
+  .summary-card.c-may::before { background: var(--may); }
+  .summary-card.c-lucia::before { background: var(--lucia); }
+
+  .card-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .card-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+
+  .card-hours {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .card-hours .big {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .card-hours .unit {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .card-breakdown {
+    display: flex;
+    gap: 16px;
+  }
+
+  .card-stat { display: flex; flex-direction: column; }
+
+  .card-stat .val {
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .card-stat .lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .val-rt { color: var(--rt-color); }
+  .val-ot { color: var(--ot-color); }
+
+  /* OT bar visualization */
+  .ot-bar-track {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 14px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .ot-bar-rt {
+    height: 100%;
+    background: var(--rt-color);
+    border-radius: 2px 0 0 2px;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ot-bar-ot {
+    height: 100%;
+    background: var(--ot-color);
+    border-radius: 0 2px 2px 0;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* === GRAND TOTALS === */
+  .grand-total-bar {
+    margin-top: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .gt-item { display: flex; flex-direction: column; align-items: center; }
+
+  .gt-item .gt-val {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .gt-item .gt-lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .gt-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+  }
+
+  .rollover-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(240, 80, 80, 0.1);
+    border: 1px solid rgba(240, 80, 80, 0.25);
+    color: var(--ot-color);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* === ANIMATIONS === */
+  .grid-wrapper { animation: fadeSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .summary-section { animation: fadeSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+  .grand-total-bar { animation: fadeSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both; }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .summary-card {
+    animation: fadeSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .summary-card:nth-child(1) { animation-delay: 0.2s; }
+  .summary-card:nth-child(2) { animation-delay: 0.25s; }
+  .summary-card:nth-child(3) { animation-delay: 0.3s; }
+  .summary-card:nth-child(4) { animation-delay: 0.35s; }
+  .summary-card:nth-child(5) { animation-delay: 0.4s; }
+  .summary-card:nth-child(6) { animation-delay: 0.45s; }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .container { padding: 20px 16px; }
+    .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .header-right { align-items: flex-start; }
+    .header h1 { font-size: 22px; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .grand-total-bar { flex-direction: column; align-items: flex-start; }
+    .gt-divider { width: 100%; height: 1px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="facility-tag">Tonopah Home Living</div>
+      <h1>Staff Schedule <span>/ Pay Period</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="period-label">Mar 15 — Mar 27, 2026</div>
+      <div class="status-badge">In Progress</div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <a href="thl/mele_schedule.html" class="legend-item">
+      <div class="legend-dot" style="background:var(--mele)"></div>
+      Mele Langa
+      <span class="legend-role">Overnight · Weekly OT</span>
+    </a>
+    <a href="thl/ricca_schedule.html" class="legend-item">
+      <div class="legend-dot" style="background:var(--ricca)"></div>
+      Ricca Ilagan
+      <span class="legend-role">Lead DSP</span>
+    </a>
+    <a href="thl/jaz_schedule.html" class="legend-item">
+      <div class="legend-dot" style="background:var(--jaz)"></div>
+      Jaz Cafuir
+      <span class="legend-role">DSP</span>
+    </a>
+    <a href="thl/mae_schedule.html" class="legend-item">
+      <div class="legend-dot" style="background:var(--mae)"></div>
+      Mae Maglalang
+      <span class="legend-role">Tue–Thu</span>
+    </a>
+    <a href="thl/may_schedule.html" class="legend-item">
+      <div class="legend-dot" style="background:var(--may)"></div>
+      May Rioflorido
+      <span class="legend-role">LTHL Sched</span>
+    </a>
+    <a href="thl/lucia_schedule.html" class="legend-item">
+      <div class="legend-dot" style="background:var(--lucia)"></div>
+      Lucia Senoron
+      <span class="legend-role">Thu–Sat</span>
+    </a>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-label">Week 1 — Mar 15 – 21</div>
+  <div class="grid-wrapper">
+    <div class="grid">
+      <!-- Header -->
+      <div class="grid-header">
+        <div class="cell">Staff</div>
+        <div class="cell">Sun<span class="date-num">15</span></div>
+        <div class="cell">Mon<span class="date-num">16</span></div>
+        <div class="cell">Tue<span class="date-num">17</span></div>
+        <div class="cell">Wed<span class="date-num">18</span></div>
+        <div class="cell">Thu<span class="date-num">19</span></div>
+        <div class="cell">Fri<span class="date-num">20</span></div>
+        <div class="cell">Sat<span class="date-num">21</span></div>
+      </div>
+
+      <!-- Mele -->
+      <div class="grid-row s-mele">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Mele</span><span class="staff-meta">$18.50 · Weekly OT</span></div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+      </div>
+
+      <!-- Ricca -->
+      <div class="grid-row s-ricca">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Ricca</span><span class="staff-meta">$21.00 · Lead DSP</span></div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block has-ot">12</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+      </div>
+
+      <!-- Jaz -->
+      <div class="grid-row s-jaz">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Jaz</span><span class="staff-meta">$21.00 · Mon back 3/23</span></div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+      </div>
+
+      <!-- Mae -->
+      <div class="grid-row s-mae">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Mae</span><span class="staff-meta">$22.00 · Tue–Thu</span></div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+      </div>
+
+      <!-- May -->
+      <div class="grid-row s-may">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">May</span><span class="staff-meta">$21.00 · LTHL sched</span></div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block has-ot">9</div></div>
+        <div class="cell"><div class="shift-block has-ot">9</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+      </div>
+
+      <!-- Lucia -->
+      <div class="grid-row s-lucia">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Lucia</span><span class="staff-meta">$21.00 · Thu–Sat</span></div></div>
+        <div class="cell"><span class="shift-off">—</span></div>
+        <div class="cell"><span class="shift-off">—</span></div>
+        <div class="cell"><span class="shift-off">—</span></div>
+        <div class="cell"><span class="shift-off">—</span></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><div class="shift-block has-ot">12</div></div>
+        <div class="cell"><div class="shift-block">5</div></div>
+      </div>
+
+      <!-- Daily totals -->
+      <div class="grid-totals">
+        <div class="cell">Daily Coverage</div>
+        <div class="cell"><div class="daily-total">34<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">40<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">34<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">34<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">35<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">37<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">31<span class="label">hrs</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-label">Week 2 — Mar 22 – 27</div>
+  <div class="grid-wrapper">
+    <div class="grid">
+      <!-- Header -->
+      <div class="grid-header">
+        <div class="cell">Staff</div>
+        <div class="cell">Sun<span class="date-num">22</span></div>
+        <div class="cell">Mon<span class="date-num">23</span></div>
+        <div class="cell">Tue<span class="date-num">24</span></div>
+        <div class="cell">Wed<span class="date-num">25</span></div>
+        <div class="cell">Thu<span class="date-num">26</span></div>
+        <div class="cell">Fri<span class="date-num">27</span></div>
+        <div class="cell">Sat<span class="date-num">28</span></div>
+      </div>
+
+      <!-- Mele -->
+      <div class="grid-row s-mele">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Mele</span><span class="staff-meta">$18.50 · Weekly OT</span></div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off" style="opacity:0.15">—</span></div>
+      </div>
+
+      <!-- Ricca -->
+      <div class="grid-row s-ricca">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Ricca</span><span class="staff-meta">$21.00 · Lead DSP</span></div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block has-ot">12</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><span class="shift-off" style="opacity:0.15">—</span></div>
+      </div>
+
+      <!-- Jaz -->
+      <div class="grid-row s-jaz">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Jaz</span><span class="staff-meta">$21.00 · Mon BACK</span></div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block" style="border-style:dashed">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off" style="opacity:0.15">—</span></div>
+      </div>
+
+      <!-- Mae -->
+      <div class="grid-row s-mae">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Mae</span><span class="staff-meta">$22.00 · Tue–Thu</span></div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><span class="shift-off">OFF</span></div>
+        <div class="cell"><span class="shift-off" style="opacity:0.15">—</span></div>
+      </div>
+
+      <!-- May -->
+      <div class="grid-row s-may">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">May</span><span class="staff-meta">$21.00 · LTHL sched</span></div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block">8</div></div>
+        <div class="cell"><div class="shift-block has-ot">9</div></div>
+        <div class="cell"><div class="shift-block has-ot">9</div></div>
+        <div class="cell"><span class="shift-off" style="opacity:0.15">—</span></div>
+      </div>
+
+      <!-- Lucia -->
+      <div class="grid-row s-lucia">
+        <div class="cell"><div class="staff-indicator"></div><div class="staff-info"><span class="staff-name">Lucia</span><span class="staff-meta">$21.00 · Thu–Sat</span></div></div>
+        <div class="cell"><span class="shift-off">—</span></div>
+        <div class="cell"><span class="shift-off">—</span></div>
+        <div class="cell"><span class="shift-off">—</span></div>
+        <div class="cell"><span class="shift-off">—</span></div>
+        <div class="cell"><div class="shift-block has-ot">10</div></div>
+        <div class="cell"><div class="shift-block has-ot">12</div></div>
+        <div class="cell"><div class="shift-block">5</div></div>
+      </div>
+
+      <!-- Daily totals -->
+      <div class="grid-totals">
+        <div class="cell">Daily Coverage</div>
+        <div class="cell"><div class="daily-total">34<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">38<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">34<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">34<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">35<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">37<span class="label">hrs</span></div></div>
+        <div class="cell"><div class="daily-total">5<span class="label">hrs</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYROLL SUMMARY -->
+  <div class="summary-section">
+    <div class="summary-title">Payroll Breakdown — Expected</div>
+    <div class="summary-grid">
+
+      <!-- Mele -->
+      <div class="summary-card c-mele">
+        <div class="card-name" style="color:var(--mele)">Mele Langa</div>
+        <div class="card-subtitle">Overnight · $18.50/hr · Weekly OT</div>
+        <div class="card-hours">
+          <span class="big">116</span>
+          <span class="unit">hrs</span>
+        </div>
+        <div class="card-breakdown">
+          <div class="card-stat"><span class="val val-rt">80</span><span class="lbl">RT hrs</span></div>
+          <div class="card-stat"><span class="val val-ot">36</span><span class="lbl">OT hrs</span></div>
+          <div class="card-stat"><span class="val val-ot" style="font-size:13px">+8</span><span class="lbl">Rollover</span></div>
+        </div>
+        <div class="ot-bar-track">
+          <div class="ot-bar-rt" style="width:69%"></div>
+          <div class="ot-bar-ot" style="width:31%"></div>
+        </div>
+      </div>
+
+      <!-- Ricca -->
+      <div class="summary-card c-ricca">
+        <div class="card-name" style="color:var(--ricca)">Ricca Ilagan</div>
+        <div class="card-subtitle">Lead DSP · $21.00/hr · Daily OT</div>
+        <div class="card-hours">
+          <span class="big">88</span>
+          <span class="unit">hrs</span>
+        </div>
+        <div class="card-breakdown">
+          <div class="card-stat"><span class="val val-rt">80</span><span class="lbl">RT hrs</span></div>
+          <div class="card-stat"><span class="val val-ot">8</span><span class="lbl">OT hrs</span></div>
+        </div>
+        <div class="ot-bar-track">
+          <div class="ot-bar-rt" style="width:91%"></div>
+          <div class="ot-bar-ot" style="width:9%"></div>
+        </div>
+      </div>
+
+      <!-- Jaz -->
+      <div class="summary-card c-jaz">
+        <div class="card-name" style="color:var(--jaz)">Jaz Cafuir</div>
+        <div class="card-subtitle">DSP · $21.00/hr · Daily OT</div>
+        <div class="card-hours">
+          <span class="big">56</span>
+          <span class="unit">hrs</span>
+        </div>
+        <div class="card-breakdown">
+          <div class="card-stat"><span class="val val-rt">56</span><span class="lbl">RT hrs</span></div>
+          <div class="card-stat"><span class="val" style="color:var(--text-muted)">0</span><span class="lbl">OT hrs</span></div>
+        </div>
+        <div class="ot-bar-track">
+          <div class="ot-bar-rt" style="width:100%"></div>
+        </div>
+      </div>
+
+      <!-- Mae -->
+      <div class="summary-card c-mae">
+        <div class="card-name" style="color:var(--mae)">Mae Maglalang</div>
+        <div class="card-subtitle">DSP · $22.00/hr · Tue–Thu only</div>
+        <div class="card-hours">
+          <span class="big">48</span>
+          <span class="unit">hrs</span>
+        </div>
+        <div class="card-breakdown">
+          <div class="card-stat"><span class="val val-rt">48</span><span class="lbl">RT hrs</span></div>
+          <div class="card-stat"><span class="val" style="color:var(--text-muted)">0</span><span class="lbl">OT hrs</span></div>
+        </div>
+        <div class="ot-bar-track">
+          <div class="ot-bar-rt" style="width:100%"></div>
+        </div>
+      </div>
+
+      <!-- May -->
+      <div class="summary-card c-may">
+        <div class="card-name" style="color:var(--may)">May Rioflorido</div>
+        <div class="card-subtitle">DSP · $21.00/hr · LTHL pay sched</div>
+        <div class="card-hours">
+          <span class="big">108</span>
+          <span class="unit">hrs</span>
+        </div>
+        <div class="card-breakdown">
+          <div class="card-stat"><span class="val val-rt">94</span><span class="lbl">RT hrs</span></div>
+          <div class="card-stat"><span class="val val-ot">14</span><span class="lbl">OT hrs</span></div>
+        </div>
+        <div class="ot-bar-track">
+          <div class="ot-bar-rt" style="width:87%"></div>
+          <div class="ot-bar-ot" style="width:13%"></div>
+        </div>
+      </div>
+
+      <!-- Lucia -->
+      <div class="summary-card c-lucia">
+        <div class="card-name" style="color:var(--lucia)">Lucia Senoron</div>
+        <div class="card-subtitle">DSP · $21.00/hr · Thu–Sat</div>
+        <div class="card-hours">
+          <span class="big">54</span>
+          <span class="unit">hrs</span>
+        </div>
+        <div class="card-breakdown">
+          <div class="card-stat"><span class="val val-rt">42</span><span class="lbl">RT hrs</span></div>
+          <div class="card-stat"><span class="val val-ot">12</span><span class="lbl">OT hrs</span></div>
+        </div>
+        <div class="ot-bar-track">
+          <div class="ot-bar-rt" style="width:78%"></div>
+          <div class="ot-bar-ot" style="width:22%"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GRAND TOTALS -->
+  <div class="grand-total-bar">
+    <div class="gt-item">
+      <div class="gt-val">470</div>
+      <div class="gt-lbl">Total Hours</div>
+    </div>
+    <div class="gt-divider"></div>
+    <div class="gt-item">
+      <div class="gt-val" style="color:var(--rt-color)">400</div>
+      <div class="gt-lbl">Regular Time</div>
+    </div>
+    <div class="gt-divider"></div>
+    <div class="gt-item">
+      <div class="gt-val" style="color:var(--ot-color)">70</div>
+      <div class="gt-lbl">Overtime</div>
+    </div>
+    <div class="gt-divider"></div>
+    <div class="rollover-tag">+8 OT ROLLOVER FROM PREV PERIOD (MELE)</div>
+    <div class="gt-divider"></div>
+    <div class="gt-item">
+      <div class="gt-val" style="color:var(--accent)">6</div>
+      <div class="gt-lbl">Active Staff</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
