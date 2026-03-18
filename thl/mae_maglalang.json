@@ -1,0 +1,30 @@
+{
+  "staff": "Mae Maglalang",
+  "facility": "THL",
+  "period": "Mar 15 - Mar 27, 2026",
+  "rate": 22.00,
+  "ot_type": "daily",
+  "ot_note": "Tue-Thu only (dropped Sun/Mon starting Feb 22). 8-10 hrs depending on day.",
+  "weekly_pattern": "Tue 8-10, Wed 8-10, Thu 8-10 = 24-30/wk",
+
+  "entries": [
+    { "date": "2026-03-15", "day": "Sun", "hours": 0, "status": "off" },
+    { "date": "2026-03-16", "day": "Mon", "hours": 0, "status": "off" },
+    { "date": "2026-03-17", "day": "Tue", "hours": 8, "status": "scheduled" },
+    { "date": "2026-03-18", "day": "Wed", "hours": 8, "status": "scheduled" },
+    { "date": "2026-03-19", "day": "Thu", "hours": 8, "status": "scheduled" },
+    { "date": "2026-03-20", "day": "Fri", "hours": 0, "status": "off" },
+    { "date": "2026-03-21", "day": "Sat", "hours": 0, "status": "off" },
+
+    { "date": "2026-03-22", "day": "Sun", "hours": 0, "status": "off" },
+    { "date": "2026-03-23", "day": "Mon", "hours": 0, "status": "off" },
+    { "date": "2026-03-24", "day": "Tue", "hours": 8, "status": "scheduled" },
+    { "date": "2026-03-25", "day": "Wed", "hours": 8, "status": "scheduled" },
+    { "date": "2026-03-26", "day": "Thu", "hours": 8, "status": "scheduled" },
+    { "date": "2026-03-27", "day": "Fri", "hours": 0, "status": "off" }
+  ],
+
+  "expected_total": 48,
+  "expected_rt": 48,
+  "expected_ot": 0
+}
