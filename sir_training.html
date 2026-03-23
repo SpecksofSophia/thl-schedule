@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>What to Report — THL &amp; LTHL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+:root {
+  --bg: #FAF7F2;
+  --bg-warm: #F5F0E8;
+  --surface: #FFFFFF;
+  --text: #1C1917;
+  --text-mid: #57534E;
+  --text-dim: #A8A29E;
+  --border: #E7E5E4;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --mono: 'DM Mono', monospace;
+  --display: 'Syne', sans-serif;
+  --body: 'DM Sans', system-ui, sans-serif;
+  --er: #DC2626;
+  --fall: #EA580C;
+  --seizure: #2563EB;
+  --choking: #7C3AED;
+  --med: #0D9488;
+  --death: #1E293B;
+  --abuse: #BE123C;
+  --missing: #D97706;
+  --law: #1E3A5F;
+  --injury: #B91C1C;
+}
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NOISE TEXTURE ─── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page { position: relative; z-index: 1; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+/* ─── TYPOGRAPHY ─── */
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.03em; }
+h1 { font-size: clamp(2.8rem, 8vw, 4.5rem); font-weight: 800; line-height: 0.95; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; line-height: 1.15; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+
+/* ─── REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ════════════════════════════════════════════
+   HERO
+   ════════════════════════════════════════════ */
+.hero {
+  padding: 100px 0 60px;
+  text-align: center;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-badge .pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--er);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(220,38,38,0); }
+}
+.hero h1 { margin-bottom: 20px; }
+.hero h1 .accent { color: var(--er); }
+.hero-sub {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  color: var(--text-mid);
+  max-width: 480px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+.hero-rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 32px;
+  padding: 12px 24px;
+  background: #FEF2F2;
+  border: 2px solid #FECACA;
+  border-radius: var(--radius-sm);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--er);
+}
+
+/* ════════════════════════════════════════════
+   INCIDENT CARDS — THE STAR
+   ════════════════════════════════════════════ */
+.incidents-section {
+  padding: 40px 0 60px;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-header p {
+  color: var(--text-mid);
+  font-size: 1.05rem;
+  margin-top: 10px;
+}
+
+.incident-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 520px) {
+  .incident-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+
+.incident-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 22px 22px;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+  cursor: default;
+}
+.incident-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+.incident-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+/* Card color strips */
+.incident-card.er::before { background: var(--er); }
+.incident-card.fall::before { background: var(--fall); }
+.incident-card.seizure::before { background: var(--seizure); }
+.incident-card.choking::before { background: var(--choking); }
+.incident-card.med::before { background: var(--med); }
+.incident-card.death::before { background: var(--death); }
+.incident-card.abuse::before { background: var(--abuse); }
+.incident-card.missing::before { background: var(--missing); }
+.incident-card.law::before { background: var(--law); }
+.incident-card.injury::before { background: var(--injury); }
+
+.card-icon {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 16px;
+}
+.card-icon svg { width: 100%; height: 100%; }
+
+.card-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+/* Title colors */
+.incident-card.er .card-title { color: var(--er); }
+.incident-card.fall .card-title { color: var(--fall); }
+.incident-card.seizure .card-title { color: var(--seizure); }
+.incident-card.choking .card-title { color: var(--choking); }
+.incident-card.med .card-title { color: var(--med); }
+.incident-card.death .card-title { color: var(--death); }
+.incident-card.abuse .card-title { color: var(--abuse); }
+.incident-card.missing .card-title { color: var(--missing); }
+.incident-card.law .card-title { color: var(--law); }
+.incident-card.injury .card-title { color: var(--injury); }
+
+.card-trigger {
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.45;
+}
+.card-trigger strong { color: var(--text); font-weight: 600; }
+
+/* Full-width featured cards */
+.incident-card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 32px 28px;
+}
+.incident-card.featured .card-icon {
+  width: 88px;
+  height: 88px;
+  margin-bottom: 0;
+}
+.incident-card.featured .card-title {
+  font-size: 1.4rem;
+}
+@media (max-width: 520px) {
+  .incident-card.featured {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .incident-card.featured .card-icon { margin: 0 auto 8px; }
+}
+
+/* ════════════════════════════════════════════
+   HOW TO REPORT — SIMPLE
+   ════════════════════════════════════════════ */
+.report-section {
+  padding: 60px 0;
+}
+.report-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 32px;
+  text-align: center;
+}
+.report-card .telegram-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+}
+.report-card h2 { margin-bottom: 12px; }
+.report-card p {
+  color: var(--text-mid);
+  max-width: 420px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+}
+
+/* ─── INCLUDE LIST ─── */
+.include-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 32px;
+}
+.include-item {
+  background: var(--bg-warm);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+  text-align: center;
+}
+.include-key {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--er);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.include-val {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  font-weight: 500;
+}
+
+/* ════════════════════════════════════════════
+   DOUBT BANNER
+   ════════════════════════════════════════════ */
+.doubt-banner {
+  margin: 0 20px 60px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+}
+.doubt-banner h2 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+.doubt-banner p {
+  color: rgba(255,255,255,0.65);
+  font-size: 1.05rem;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* ════════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════════ */
+.footer {
+  padding: 40px 0;
+  text-align: center;
+}
+.footer p {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── PRINT ─── */
+@media print {
+  body { background: #fff; font-size: 11pt; }
+  body::after { display: none; }
+  .hero { padding: 24px 0; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .incident-card:hover { transform: none; box-shadow: none; }
+  .incident-card { break-inside: avoid; border: 2px solid #ddd; }
+  .doubt-banner { background: #333; }
+  @page { margin: 0.5in; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .hero { padding: 72px 0 40px; }
+  .incident-card { padding: 24px 18px 18px; }
+  .report-card { padding: 36px 20px; }
+  .doubt-banner { margin: 0 16px 40px; padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge reveal"><span class="pulse"></span> Required Training</div>
+    <h1 class="reveal" style="transition-delay:0.08s">Know What<br>to <span class="accent">Report</span></h1>
+    <p class="hero-sub reveal" style="transition-delay:0.16s">If any of these happen to a resident, text Anthony immediately. You report it. We handle the rest.</p>
+    <div class="hero-rule reveal" style="transition-delay:0.24s">&#9200; Report within 24 hours</div>
+  </div>
+</section>
+
+<!-- ═══ INCIDENTS — THE STAR ═══ -->
+<section class="incidents-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>The 10 Reportable Incidents</h2>
+      <p>If you see any of these, it needs a report. No exceptions.</p>
+    </div>
+
+    <div class="incident-grid">
+
+      <!-- 1. ER VISIT — FEATURED -->
+      <div class="incident-card er featured reveal" style="transition-delay:0.06s">
+        <div class="card-icon">
+          <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="20" width="72" height="52" rx="8" fill="#FEE2E2"/>
+            <rect x="28" y="36" width="32" height="8" rx="2" fill="#DC2626"/>
+            <rect x="40" y="24" width="8" height="32" rx="2" fill="#DC2626"/>
+            <circle cx="72" cy="20" r="12" fill="#DC2626"/>
+            <path d="M68 20h8M72 16v8" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">ER Visit</div>
+          <div class="card-trigger"><strong>Any time</strong> a resident goes to the emergency room, for any reason</div>
+        </div>
+      </div>
+
+      <!-- 2. FALL — FEATURED -->
+      <div class="incident-card fall featured reveal" style="transition-delay:0.09s">
+        <div class="card-icon">
+          <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="44" cy="18" r="8" fill="#FFEDD5"/>
+            <circle cx="44" cy="18" r="5" fill="#EA580C"/>
+            <path d="M44 26 L38 44 L28 56" stroke="#EA580C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M44 26 L50 44 L60 56" stroke="#EA580C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M38 44 L26 38" stroke="#EA580C" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M50 44 L62 38" stroke="#EA580C" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M20 68 L68 68" stroke="#FDBA74" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 6"/>
+            <path d="M32 62 L38 68 L44 64 L50 68 L56 62" stroke="#EA580C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Fall</div>
+          <div class="card-trigger"><strong>Any fall</strong>, whether or not there's visible injury. Include where and how it happened</div>
+        </div>
+      </div>
+
+      <!-- 3. SEIZURE -->
+      <div class="incident-card seizure reveal" style="transition-delay:0.12s">
+        <div class="card-icon">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="56" height="56" rx="14" fill="#EFF6FF"/>
+            <path d="M22 36 L30 22 L36 40 L42 28 L50 36" stroke="#2563EB" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="36" cy="52" r="4" fill="#2563EB" opacity="0.3"/>
+            <circle cx="36" cy="52" r="2" fill="#2563EB"/>
+          </svg>
+        </div>
+        <div class="card-title">Seizure</div>
+        <div class="card-trigger"><strong>Any seizure activity.</strong> Note how long it lasted</div>
+      </div>
+
+      <!-- 4. CHOKING -->
+      <div class="incident-card choking reveal" style="transition-delay:0.15s">
+        <div class="card-icon">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="56" height="56" rx="14" fill="#F5F3FF"/>
+            <circle cx="36" cy="28" r="9" fill="#EDE9FE"/>
+            <circle cx="36" cy="28" r="6" fill="#7C3AED" opacity="0.6"/>
+            <path d="M30 40 L36 52 L42 40" stroke="#7C3AED" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M28 44 L44 44" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            <path d="M26 48 L46 48" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="card-title">Choking</div>
+        <div class="card-trigger"><strong>Any choking incident</strong> during meals or otherwise</div>
+      </div>
+
+      <!-- 5. MEDICATION ERROR -->
+      <div class="incident-card med reveal" style="transition-delay:0.18s">
+        <div class="card-icon">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="56" height="56" rx="14" fill="#F0FDFA"/>
+            <rect x="22" y="20" width="28" height="36" rx="6" fill="#CCFBF1"/>
+            <rect x="22" y="20" width="28" height="18" rx="6" fill="#0D9488"/>
+            <path d="M32 42 L40 50" stroke="#0D9488" stroke-width="3" stroke-linecap="round"/>
+            <path d="M40 42 L32 50" stroke="#0D9488" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-title">Medication Error</div>
+        <div class="card-trigger"><strong>Wrong dose, wrong med, wrong time,</strong> or missed dose</div>
+      </div>
+
+      <!-- 6. INJURY -->
+      <div class="incident-card injury reveal" style="transition-delay:0.21s">
+        <div class="card-icon">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="56" height="56" rx="14" fill="#FEF2F2"/>
+            <rect x="20" y="30" width="32" height="12" rx="4" fill="#FECACA"/>
+            <rect x="30" y="20" width="12" height="32" rx="4" fill="#FECACA"/>
+            <rect x="22" y="32" width="28" height="8" rx="3" fill="#B91C1C"/>
+            <rect x="32" y="22" width="8" height="28" rx="3" fill="#B91C1C"/>
+          </svg>
+        </div>
+        <div class="card-title">Injury Needing Care</div>
+        <div class="card-trigger"><strong>Cuts, burns, bruises</strong> that need medical attention</div>
+      </div>
+
+      <!-- 7. ABUSE/NEGLECT — FEATURED -->
+      <div class="incident-card abuse featured reveal" style="transition-delay:0.24s">
+        <div class="card-icon">
+          <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M44 12 L72 68 L16 68 Z" fill="#FFF1F2" stroke="#BE123C" stroke-width="3" stroke-linejoin="round"/>
+            <rect x="40" y="32" width="8" height="20" rx="3" fill="#BE123C"/>
+            <circle cx="44" cy="58" r="4" fill="#BE123C"/>
+          </svg>
+        </div>
+        <div>
+          <div class="card-title">Abuse or Neglect Allegation</div>
+          <div class="card-trigger"><strong>Any allegation</strong> of physical, verbal, or emotional abuse or neglect, even if suspected</div>
+        </div>
+      </div>
+
+      <!-- 8. DEATH -->
+      <div class="incident-card death reveal" style="transition-delay:0.27s">
+        <div class="card-icon">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="56" height="56" rx="14" fill="#F1F5F9"/>
+            <rect x="33" y="38" width="6" height="18" rx="2" fill="#94A3B8"/>
+            <ellipse cx="36" cy="30" rx="8" ry="10" fill="#CBD5E1"/>
+            <ellipse cx="36" cy="28" rx="5" ry="7" fill="#1E293B" opacity="0.7"/>
+            <circle cx="36" cy="26" r="2" fill="#FCD34D"/>
+          </svg>
+        </div>
+        <div class="card-title">Death</div>
+        <div class="card-trigger"><strong>Any death</strong> at the facility or while in care</div>
+      </div>
+
+      <!-- 9. MISSING PERSON -->
+      <div class="incident-card missing reveal" style="transition-delay:0.30s">
+        <div class="card-icon">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="56" height="56" rx="14" fill="#FFFBEB"/>
+            <circle cx="36" cy="28" r="10" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5" stroke-dasharray="4 4"/>
+            <circle cx="36" cy="25" r="4" fill="#D97706" opacity="0.5"/>
+            <path d="M36 32 L36 40" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            <text x="52" y="56" font-family="Syne,sans-serif" font-weight="800" font-size="22" fill="#D97706">?</text>
+          </svg>
+        </div>
+        <div class="card-title">Missing Person</div>
+        <div class="card-trigger"><strong>Can't find a resident</strong> or they left the facility without permission</div>
+      </div>
+
+      <!-- 10. LAW ENFORCEMENT -->
+      <div class="incident-card law reveal" style="transition-delay:0.33s">
+        <div class="card-icon">
+          <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="56" height="56" rx="14" fill="#EFF6FF"/>
+            <path d="M36 18 L50 28 L46 48 L26 48 L22 28 Z" fill="#DBEAFE" stroke="#1E3A5F" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="36" cy="35" r="6" fill="#1E3A5F"/>
+            <circle cx="36" cy="35" r="3" fill="#93C5FD"/>
+          </svg>
+        </div>
+        <div class="card-title">Law Enforcement</div>
+        <div class="card-trigger"><strong>Police called to</strong> or visiting the facility for any reason</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW TO REPORT ═══ -->
+<section class="report-section">
+  <div class="container">
+    <div class="report-card reveal">
+      <div class="telegram-icon">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="28" fill="#229ED9"/>
+          <path d="M14 30.5L47 18 39 48 30 38 14 30.5Z" fill="#fff"/>
+          <path d="M30 38L33 48 39 48 30 38Z" fill="#CAE4F5"/>
+          <path d="M30 38L39 28" stroke="#229ED9" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h2>Text Anthony on Telegram</h2>
+      <p>Describe what happened in your own words. Don't worry about format. Just get the info out. Anthony handles the paperwork and files with SGPRC.</p>
+
+      <div class="include-grid">
+        <div class="include-item"><div class="include-key">Who</div><div class="include-val">Resident name</div></div>
+        <div class="include-item"><div class="include-key">What</div><div class="include-val">What happened</div></div>
+        <div class="include-item"><div class="include-key">When</div><div class="include-val">Approx. time</div></div>
+        <div class="include-item"><div class="include-key">Where</div><div class="include-val">Location</div></div>
+        <div class="include-item"><div class="include-key">Called</div><div class="include-val">Who notified</div></div>
+        <div class="include-item"><div class="include-key">Injury</div><div class="include-val">What you saw</div></div>
+        <div class="include-item"><div class="include-key">Action</div><div class="include-val">What you did</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOUBT BANNER ═══ -->
+<div class="doubt-banner reveal">
+  <h2>When in doubt, report it.</h2>
+  <p>It's always better to report something that didn't need a SIR than to miss something that did.</p>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<section class="footer">
+  <div class="container">
+    <p>THL &bull; LTHL &bull; SGPRC Form 641 &bull; Title 17 CCR &sect;54327</p>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 140);
+    });
+  });
+})();
+</script>
+</body>
+</html>
