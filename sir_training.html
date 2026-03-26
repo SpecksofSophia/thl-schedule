@@ -46,7 +46,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── NOISE TEXTURE ─── */
 body::after {
   content: '';
   position: fixed;
@@ -59,13 +58,11 @@ body::after {
 .page { position: relative; z-index: 1; }
 .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
 
-/* ─── TYPOGRAPHY ─── */
 h1, h2, h3 { font-family: var(--display); letter-spacing: -0.03em; }
 h1 { font-size: clamp(2.8rem, 8vw, 4.5rem); font-weight: 800; line-height: 0.95; }
 h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; line-height: 1.15; }
 h3 { font-size: 1.15rem; font-weight: 700; }
 
-/* ─── REVEAL ─── */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -133,7 +130,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 }
 
 /* ════════════════════════════════════════════
-   INCIDENT CARDS — THE STAR
+   INCIDENT CARDS
    ════════════════════════════════════════════ */
 .incidents-section {
   padding: 40px 0 60px;
@@ -141,6 +138,14 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 .section-header {
   text-align: center;
   margin-bottom: 40px;
+}
+.section-header .section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 .section-header p {
   color: var(--text-mid);
@@ -180,7 +185,6 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   box-shadow: 0 12px 40px rgba(0,0,0,0.08);
 }
 
-/* Card color strips */
 .incident-card.er::before { background: var(--er); }
 .incident-card.fall::before { background: var(--fall); }
 .incident-card.seizure::before { background: var(--seizure); }
@@ -207,7 +211,6 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   margin-bottom: 6px;
 }
 
-/* Title colors */
 .incident-card.er .card-title { color: var(--er); }
 .incident-card.fall .card-title { color: var(--fall); }
 .incident-card.seizure .card-title { color: var(--seizure); }
@@ -226,7 +229,6 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 }
 .card-trigger strong { color: var(--text); font-weight: 600; }
 
-/* Full-width featured cards */
 .incident-card.featured {
   grid-column: 1 / -1;
   display: grid;
@@ -251,8 +253,26 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   .incident-card.featured .card-icon { margin: 0 auto 8px; }
 }
 
+/* QA FOCUS badge */
+.qa-badge {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.6;
+}
+.incident-card.fall .qa-badge { background: var(--fall); }
+.incident-card.med .qa-badge { background: var(--med); }
+
 /* ════════════════════════════════════════════
-   HOW TO REPORT — SIMPLE
+   HOW TO REPORT
    ════════════════════════════════════════════ */
 .report-section {
   padding: 60px 0;
@@ -277,7 +297,6 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   font-size: 1.05rem;
 }
 
-/* ─── INCLUDE LIST ─── */
 .include-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -306,9 +325,145 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 }
 
 /* ════════════════════════════════════════════
-   DOUBT BANNER
+   QUIZ
    ════════════════════════════════════════════ */
-.doubt-banner {
+.quiz-section {
+  padding: 60px 0;
+}
+.quiz-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  margin-bottom: 16px;
+}
+.quiz-card .q-number {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.quiz-card .q-text {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.35;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.quiz-option {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  background: var(--bg-warm);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--body);
+  font-size: 0.95rem;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+  line-height: 1.4;
+}
+.quiz-option:hover:not(.disabled) {
+  border-color: var(--border);
+}
+.quiz-option.correct {
+  background: #DCFCE7;
+  border-color: #16A34A;
+}
+.quiz-option.wrong {
+  background: #FEE2E2;
+  border-color: #DC2626;
+}
+.quiz-option.disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+.quiz-option.correct.disabled { opacity: 1; }
+
+.quiz-feedback {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s;
+  background: #F0FDF4;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  color: #166534;
+  line-height: 1.5;
+  padding: 0 18px;
+}
+.quiz-feedback.show {
+  max-height: 120px;
+  padding: 14px 18px;
+  margin-top: 8px;
+}
+
+/* ════════════════════════════════════════════
+   PRACTICE
+   ════════════════════════════════════════════ */
+.practice-section {
+  padding: 0 0 60px;
+}
+.practice-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+}
+.mock-report {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  background: var(--bg-warm);
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  white-space: pre-wrap;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.practice-instruction {
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  margin-bottom: 16px;
+}
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: #FEF2F2;
+  border: 2px solid #FECACA;
+  border-radius: var(--radius-sm);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--er);
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 20px;
+}
+.copy-btn:hover { background: #FEE2E2; }
+
+.warning-card {
+  border-left: 4px solid var(--fall);
+  background: #FFFBEB;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 18px;
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+/* ════════════════════════════════════════════
+   INCENTIVE BANNER
+   ════════════════════════════════════════════ */
+.incentive-banner {
   margin: 0 20px 60px;
   max-width: 760px;
   margin-left: auto;
@@ -319,20 +474,37 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   padding: 40px 32px;
   text-align: center;
 }
-.doubt-banner h2 {
+.incentive-banner h2 {
   color: #fff;
   margin-bottom: 10px;
 }
-.doubt-banner p {
+.incentive-banner p {
   color: rgba(255,255,255,0.65);
   font-size: 1.05rem;
-  max-width: 440px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
 /* ════════════════════════════════════════════
-   FOOTER
+   CONTACT + FOOTER
    ════════════════════════════════════════════ */
+.contact-section {
+  padding: 20px 0 10px;
+  text-align: center;
+}
+.contact-section p {
+  color: var(--text-mid);
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.contact-section svg {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
 .footer {
   padding: 40px 0;
   text-align: center;
@@ -345,7 +517,9 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   text-transform: uppercase;
 }
 
-/* ─── PRINT ─── */
+/* ════════════════════════════════════════════
+   PRINT
+   ════════════════════════════════════════════ */
 @media print {
   body { background: #fff; font-size: 11pt; }
   body::after { display: none; }
@@ -353,17 +527,27 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   .reveal { opacity: 1 !important; transform: none !important; }
   .incident-card:hover { transform: none; box-shadow: none; }
   .incident-card { break-inside: avoid; border: 2px solid #ddd; }
-  .doubt-banner { background: #333; }
+  .quiz-card { break-inside: avoid; }
+  .incentive-banner { background: #333; }
+  .quiz-option { border: 1px solid #ccc; }
   @page { margin: 0.5in; }
 }
 
-/* ─── RESPONSIVE ─── */
+/* ════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════ */
+@media (max-width: 520px) {
+  .quiz-card { padding: 24px 18px; }
+  .practice-card { padding: 28px 18px; }
+}
 @media (max-width: 480px) {
   .container { padding: 0 16px; }
   .hero { padding: 72px 0 40px; }
   .incident-card { padding: 24px 18px 18px; }
   .report-card { padding: 36px 20px; }
-  .doubt-banner { margin: 0 16px 40px; padding: 32px 20px; }
+  .incentive-banner { margin: 0 16px 40px; padding: 32px 20px; }
+  .quiz-card { padding: 20px 14px; }
+  .practice-card { padding: 24px 14px; }
 }
 </style>
 </head>
@@ -380,7 +564,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   </div>
 </section>
 
-<!-- ═══ INCIDENTS — THE STAR ═══ -->
+<!-- ═══ INCIDENTS ═══ -->
 <section class="incidents-section">
   <div class="container">
     <div class="section-header reveal">
@@ -409,6 +593,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 
       <!-- 2. FALL — FEATURED -->
       <div class="incident-card fall featured reveal" style="transition-delay:0.09s">
+        <span class="qa-badge">QA Focus</span>
         <div class="card-icon">
           <svg viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="44" cy="18" r="8" fill="#FFEDD5"/>
@@ -459,6 +644,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 
       <!-- 5. MEDICATION ERROR -->
       <div class="incident-card med reveal" style="transition-delay:0.18s">
+        <span class="qa-badge">QA Focus</span>
         <div class="card-icon">
           <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="8" y="8" width="56" height="56" rx="14" fill="#F0FDFA"/>
@@ -578,16 +764,88 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   </div>
 </section>
 
-<!-- ═══ DOUBT BANNER ═══ -->
-<div class="doubt-banner reveal">
-  <h2>When in doubt, report it.</h2>
-  <p>It's always better to report something that didn't need a SIR than to miss something that did.</p>
+<!-- ═══ QUIZ ═══ -->
+<section class="quiz-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Quick Check</div>
+      <h2>3 Questions</h2>
+      <p>Make sure it's clear before you go</p>
+    </div>
+
+    <!-- Q1 -->
+    <div class="quiz-card reveal" data-quiz="1">
+      <div class="q-number">Question 1</div>
+      <div class="q-text">A resident trips on the rug and falls. They say they're fine and there are no visible injuries. Do you report it?</div>
+      <button class="quiz-option" data-index="0">A) No, they said they're fine</button>
+      <button class="quiz-option" data-index="1">B) Only if you see a bruise later</button>
+      <button class="quiz-option" data-correct="true" data-index="2">C) Yes, report all falls regardless of injury</button>
+      <button class="quiz-option" data-index="3">D) Only if they went to the ER</button>
+      <div class="quiz-feedback">Any fall gets reported. Even if there's no injury. QA will ask about this.</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-card reveal" data-quiz="2">
+      <div class="q-number">Question 2</div>
+      <div class="q-text">How quickly must an incident be reported?</div>
+      <button class="quiz-option" data-index="0">A) By the end of your shift</button>
+      <button class="quiz-option" data-correct="true" data-index="1">B) Within 24 hours</button>
+      <button class="quiz-option" data-index="2">C) Within 48 hours</button>
+      <button class="quiz-option" data-index="3">D) At the next staff meeting</button>
+      <div class="quiz-feedback">Title 22 section 80061 requires reporting within 24 hours or next business day.</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-card reveal" data-quiz="3">
+      <div class="q-number">Question 3</div>
+      <div class="q-text">Which of these does NOT require a Special Incident Report?</div>
+      <button class="quiz-option" data-correct="true" data-index="0">A) A resident refuses breakfast and goes back to bed</button>
+      <button class="quiz-option" data-index="1">B) A resident is given the wrong medication</button>
+      <button class="quiz-option" data-index="2">C) A resident falls in the hallway</button>
+      <button class="quiz-option" data-index="3">D) A resident is found outside the facility without permission</button>
+      <div class="quiz-feedback">Refusing a meal is a personal choice, not an incident. The other three are all reportable.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ PRACTICE ═══ -->
+<section class="practice-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Practice</div>
+      <h2>Try a Mock Report</h2>
+    </div>
+
+    <div class="practice-card reveal">
+      <div class="mock-report" id="mockText">Bonnie fell in the living room at 2:30pm today. Staff found her on the floor near the couch. No visible injuries but she was shaken. She said she tripped on the rug. 911 was not called. Ricca was on shift and helped her up.</div>
+      <p class="practice-instruction">Copy this text and send it to Anthony on Telegram as if you were reporting a real incident.</p>
+      <button class="copy-btn" id="copyBtn">Copy Text</button>
+      <div class="warning-card">This is a practice exercise. Do NOT submit on the official Adobe Sign form.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INCENTIVE BANNER ═══ -->
+<div class="incentive-banner reveal">
+  <h2>Training Counts</h2>
+  <p>Completing this training is part of your annual compliance record under HCBS Final Rules 2026. All required training modules contribute to your eligibility for the year-end performance bonus.</p>
 </div>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact-section reveal">
+  <div class="container">
+    <p>
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="28" fill="#229ED9"/><path d="M14 30.5L47 18 39 48 30 38 14 30.5Z" fill="#fff"/><path d="M30 38L33 48 39 48 30 38Z" fill="#CAE4F5"/><path d="M30 38L39 28" stroke="#229ED9" stroke-width="1.5"/></svg>
+      Questions? Notify Anthony (admin)
+    </p>
+  </div>
+</section>
 
 <!-- ═══ FOOTER ═══ -->
 <section class="footer">
   <div class="container">
-    <p>THL &bull; LTHL &bull; SGPRC Form 641 &bull; Title 17 CCR &sect;54327</p>
+    <p>THL &bull; LTHL &bull; SGPRC Form 641 &bull; Title 17 CCR &sect;54327 &bull; HCBS Final Rules 2026</p>
   </div>
 </section>
 
@@ -595,8 +853,9 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 
 <script>
 (function() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+  // Reveal observer
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
@@ -604,13 +863,61 @@ h3 { font-size: 1.15rem; font-weight: 700; }
     });
   }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
 
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 
-  requestAnimationFrame(() => {
-    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 140);
+  // Hero stagger
+  requestAnimationFrame(function() {
+    document.querySelectorAll('.hero .reveal').forEach(function(el, i) {
+      setTimeout(function() { el.classList.add('visible'); }, i * 140);
     });
   });
+
+  // Quiz handlers
+  document.querySelectorAll('.quiz-card').forEach(function(card) {
+    var answered = false;
+    card.querySelectorAll('.quiz-option').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (answered) return;
+        answered = true;
+        var isCorrect = btn.hasAttribute('data-correct');
+        var options = card.querySelectorAll('.quiz-option');
+        options.forEach(function(opt) {
+          opt.classList.add('disabled');
+          if (opt.hasAttribute('data-correct')) {
+            opt.classList.add('correct');
+          }
+        });
+        if (!isCorrect) {
+          btn.classList.add('wrong');
+        }
+        card.querySelector('.quiz-feedback').classList.add('show');
+      });
+    });
+  });
+
+  // Copy button
+  var copyBtn = document.getElementById('copyBtn');
+  var mockText = document.getElementById('mockText');
+  if (copyBtn && mockText) {
+    copyBtn.addEventListener('click', function() {
+      var text = mockText.textContent;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+          copyBtn.textContent = 'Copied!';
+          setTimeout(function() { copyBtn.textContent = 'Copy Text'; }, 2000);
+        });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(function() { copyBtn.textContent = 'Copy Text'; }, 2000);
+      }
+    });
+  }
 })();
 </script>
 </body>
