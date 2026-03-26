@@ -19,12 +19,12 @@
     { "date": "2026-03-22", "day": "Sun", "hours": 8,  "status": "scheduled" },
     { "date": "2026-03-23", "day": "Mon", "hours": 8, "status": "scheduled", "note": "Jaz covering — reduced from 12" },
     { "date": "2026-03-24", "day": "Tue", "hours": 0,  "status": "off" },
-    { "date": "2026-03-25", "day": "Wed", "hours": 8,  "status": "scheduled" },
+    { "date": "2026-03-25", "day": "Wed", "hours": 9,  "status": "approved", "note": "IN 1:26 PM, OUT 10:08 PM. 1hr OT." },
     { "date": "2026-03-26", "day": "Thu", "hours": 8,  "status": "scheduled" },
     { "date": "2026-03-27", "day": "Fri", "hours": 0,  "status": "off" }
   ],
 
-  "expected_total": 84,
+  "expected_total": 85,
   "expected_rt": 80,
-  "expected_ot": 4
+  "expected_ot": 5
 }
