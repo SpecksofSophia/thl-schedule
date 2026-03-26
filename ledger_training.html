@@ -1006,8 +1006,17 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   </div>
 </section>
 
-<!-- ═══ PRACTICE 1: Record a Purchase ═══ -->
-<section class="practice-section">
+<!-- Quiz locked message -->
+<section class="practice-section" id="practiceLocked">
+  <div class="container">
+    <div class="practice-card reveal" style="text-align:center; padding:40px 20px;">
+      <p style="font-family:var(--display); font-weight:700; font-size:1.1rem; color:var(--text-mid);">Complete all 3 quiz questions above to unlock the practice exercises.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRACTICE (hidden until quiz complete) ═══ -->
+<section class="practice-section" id="practiceSection" style="display:none;">
   <div class="container">
     <div class="section-header reveal">
       <h2>Practice</h2>
@@ -1020,7 +1029,7 @@ h3 { font-size: 1.15rem; font-weight: 700; }
         <button class="copy-btn" onclick="copyText(this)">Copy</button>
       </div>
       <p>Copy this text and send it to @PILedgersBot on Telegram. This is the quickest way to log a purchase.</p>
-      <p class="practice-note">This is a practice exercise using the real bot. The entry can be removed after.</p>
+      <p class="practice-note">This is a mock exercise. Anthony will remove the practice entry after confirming you completed the training.</p>
     </div>
 
     <!-- Practice 2: Cash Withdrawal -->
@@ -1028,11 +1037,11 @@ h3 { font-size: 1.15rem; font-weight: 700; }
       <h3>Exercise 2: Cash Withdrawal Walkthrough</h3>
       <div class="scenario-card">
         <div class="scenario-label">Scenario</div>
-        Joann requests $20 for personal shopping at Target.
+        Joann requests $20 for personal shopping.
       </div>
       <ol class="checklist">
         <li>Open @PILedgersBot on Telegram</li>
-        <li>Tap /add</li>
+        <li>Tap /start</li>
         <li>Select THL</li>
         <li>Select Joann Arrellanes</li>
         <li>Choose Cash</li>
@@ -1051,6 +1060,12 @@ h3 { font-size: 1.15rem; font-weight: 700; }
         <div class="cr-sig">________________________<br>Resident Signature</div>
       </div>
       <p class="cash-receipt-label">This is what the signed receipt looks like</p>
+    </div>
+
+    <div class="practice-card reveal" style="margin-top:16px; text-align:center;">
+      <p style="font-family:var(--mono); font-size:0.8rem; color:var(--text-mid); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">Completion Code</p>
+      <p style="font-family:var(--display); font-size:1.6rem; font-weight:800; color:var(--accent);">LEDGER-0326</p>
+      <p style="margin-top:12px; color:var(--text-mid); font-size:0.95rem;">Text this code + your practice entry to Anthony on Telegram to get credit. Mock entries will be removed after.</p>
     </div>
   </div>
 </section>
@@ -1113,14 +1128,22 @@ h3 { font-size: 1.15rem; font-weight: 700; }
     });
   });
 
-  /* ─── Quiz ─── */
-  document.querySelectorAll('.quiz-card').forEach(function(card) {
+  /* ─── Quiz + unlock practice ─── */
+  var quizCards = document.querySelectorAll('.quiz-card');
+  var quizAnswered = 0;
+  var totalQuiz = quizCards.length;
+
+  quizCards.forEach(function(card) {
     var correctIdx = parseInt(card.getAttribute('data-correct'));
     var feedback = card.querySelector('.quiz-feedback');
     var opts = card.querySelectorAll('.quiz-opt');
+    var cardAnswered = false;
 
     opts.forEach(function(opt) {
       opt.addEventListener('click', function() {
+        if (cardAnswered) return;
+        cardAnswered = true;
+        quizAnswered++;
         var idx = parseInt(opt.getAttribute('data-idx'));
         opts.forEach(function(o) { o.classList.add('disabled'); });
 
@@ -1136,6 +1159,16 @@ h3 { font-size: 1.15rem; font-weight: 700; }
           feedback.classList.add('wrong-fb');
         }
         feedback.classList.add('show');
+
+        if (quizAnswered >= totalQuiz) {
+          var locked = document.getElementById('practiceLocked');
+          var practice = document.getElementById('practiceSection');
+          if (locked) locked.style.display = 'none';
+          if (practice) {
+            practice.style.display = 'block';
+            practice.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+          }
+        }
       });
     });
   });

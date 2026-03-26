@@ -809,8 +809,8 @@ h3 { font-size: 1.15rem; font-weight: 700; }
   </div>
 </section>
 
-<!-- ═══ PRACTICE ═══ -->
-<section class="practice-section">
+<!-- ═══ PRACTICE (hidden until quiz complete) ═══ -->
+<section class="practice-section" id="practiceSection" style="display:none;">
   <div class="container">
     <div class="section-header reveal">
       <div class="section-label">Practice</div>
@@ -819,9 +819,24 @@ h3 { font-size: 1.15rem; font-weight: 700; }
 
     <div class="practice-card reveal">
       <div class="mock-report" id="mockText">Bonnie fell in the living room at 2:30pm today. Staff found her on the floor near the couch. No visible injuries but she was shaken. She said she tripped on the rug. 911 was not called. Ricca was on shift and helped her up.</div>
-      <p class="practice-instruction">Copy this text and send it to Anthony on Telegram as if you were reporting a real incident.</p>
+      <p class="practice-instruction">Copy this text and send it to Anthony on Telegram as if you were reporting a real incident. This is a mock exercise so we know you completed the training.</p>
       <button class="copy-btn" id="copyBtn">Copy Text</button>
-      <div class="warning-card">This is a practice exercise. Do NOT submit on the official Adobe Sign form.</div>
+      <div class="warning-card">This is a practice exercise. Do NOT submit on the official Adobe Sign form. Send to Anthony on Telegram only.</div>
+    </div>
+
+    <div class="practice-card reveal" style="margin-top:16px; text-align:center;">
+      <p style="font-family:var(--mono); font-size:0.8rem; color:var(--text-mid); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">Completion Code</p>
+      <p style="font-family:var(--display); font-size:1.6rem; font-weight:800; color:var(--er);">SIR-0326</p>
+      <p style="margin-top:12px; color:var(--text-mid); font-size:0.95rem;">Text this code + mock report to Anthony on Telegram to get credit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Quiz locked message -->
+<section class="practice-section" id="practiceLocked">
+  <div class="container">
+    <div class="practice-card reveal" style="text-align:center; padding:40px 20px;">
+      <p style="font-family:var(--display); font-weight:700; font-size:1.1rem; color:var(--text-mid);">Complete all 3 quiz questions above to unlock the practice exercise.</p>
     </div>
   </div>
 </section>
@@ -872,13 +887,18 @@ h3 { font-size: 1.15rem; font-weight: 700; }
     });
   });
 
-  // Quiz handlers
-  document.querySelectorAll('.quiz-card').forEach(function(card) {
+  // Quiz handlers + unlock practice
+  var quizCards = document.querySelectorAll('.quiz-card');
+  var quizAnswered = 0;
+  var totalQuiz = quizCards.length;
+
+  quizCards.forEach(function(card) {
     var answered = false;
     card.querySelectorAll('.quiz-option').forEach(function(btn) {
       btn.addEventListener('click', function() {
         if (answered) return;
         answered = true;
+        quizAnswered++;
         var isCorrect = btn.hasAttribute('data-correct');
         var options = card.querySelectorAll('.quiz-option');
         options.forEach(function(opt) {
@@ -891,6 +911,17 @@ h3 { font-size: 1.15rem; font-weight: 700; }
           btn.classList.add('wrong');
         }
         card.querySelector('.quiz-feedback').classList.add('show');
+
+        // Unlock practice when all answered
+        if (quizAnswered >= totalQuiz) {
+          var locked = document.getElementById('practiceLocked');
+          var practice = document.getElementById('practiceSection');
+          if (locked) locked.style.display = 'none';
+          if (practice) {
+            practice.style.display = 'block';
+            practice.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
+          }
+        }
       });
     });
   });
