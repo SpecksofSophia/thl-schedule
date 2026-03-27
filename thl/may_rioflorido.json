@@ -2,29 +2,30 @@
   "staff": "May Rioflorido",
   "facility": "THL",
   "period": "Mar 15 - Mar 27, 2026",
-  "rate": 21.00,
+  "rate": 23.00,
   "ot_type": "daily",
-  "ot_note": "On LTHL pay schedule (1st-15th, 16th-end) despite working THL. Covering for Lara.",
-  "weekly_pattern": "Mon 8, Tue 8, Wed 8, Thu 9, Fri 9, Sat 8, Sun 8 = 58/wk",
+  "ot_note": "Phase 2 (Mar 22+): Sun 12-8 (8hrs), Mon-Fri 2-8 (6hrs), off Sat. Covering for Lara.",
+  "weekly_pattern": "Phase 1: ~8/day | Phase 2: Sun 8, Mon-Fri 6.25, Sat OFF",
 
   "entries": [
-    { "date": "2026-03-15", "day": "Sun", "hours": 8, "status": "scheduled" },
-    { "date": "2026-03-16", "day": "Mon", "hours": 8, "status": "scheduled" },
-    { "date": "2026-03-17", "day": "Tue", "hours": 8, "status": "scheduled" },
-    { "date": "2026-03-18", "day": "Wed", "hours": 8, "status": "scheduled" },
-    { "date": "2026-03-19", "day": "Thu", "hours": 9, "status": "scheduled" },
-    { "date": "2026-03-20", "day": "Fri", "hours": 9, "status": "scheduled" },
-    { "date": "2026-03-21", "day": "Sat", "hours": 8, "status": "scheduled" },
+    { "date": "2026-03-15", "day": "Sun", "hours": 8, "status": "no data" },
+    { "date": "2026-03-16", "day": "Mon", "hours": 8, "status": "no data" },
+    { "date": "2026-03-17", "day": "Tue", "hours": 6.00, "status": "actual", "in": "14:00", "out": "20:00" },
+    { "date": "2026-03-18", "day": "Wed", "hours": 8, "status": "no data" },
+    { "date": "2026-03-19", "day": "Thu", "hours": 6.25, "status": "actual", "in": "13:45", "out": "20:00" },
+    { "date": "2026-03-20", "day": "Fri", "hours": 6.25, "status": "actual", "in": "14:00", "out": "20:15" },
+    { "date": "2026-03-21", "day": "Sat", "hours": 0, "status": "no data" },
 
-    { "date": "2026-03-22", "day": "Sun", "hours": 8, "status": "scheduled" },
-    { "date": "2026-03-23", "day": "Mon", "hours": 8, "status": "scheduled" },
-    { "date": "2026-03-24", "day": "Tue", "hours": 8, "status": "scheduled" },
-    { "date": "2026-03-25", "day": "Wed", "hours": 8, "status": "scheduled" },
-    { "date": "2026-03-26", "day": "Thu", "hours": 9, "status": "scheduled" },
-    { "date": "2026-03-27", "day": "Fri", "hours": 9, "status": "scheduled" }
+    { "date": "2026-03-22", "day": "Sun", "hours": 8.00, "status": "actual", "in": "12:00", "out": "20:00" },
+    { "date": "2026-03-23", "day": "Mon", "hours": 6.25, "status": "actual", "in": "13:45", "out": "20:00" },
+    { "date": "2026-03-24", "day": "Tue", "hours": 6.25, "status": "actual", "in": "13:45", "out": "20:00" },
+    { "date": "2026-03-25", "day": "Wed", "hours": 6.25, "status": "actual", "in": "13:45", "out": "20:00" },
+    { "date": "2026-03-26", "day": "Thu", "hours": 6.25, "status": "actual", "in": "13:45", "out": "20:00" },
+    { "date": "2026-03-27", "day": "Fri", "hours": 0, "status": "off", "note": "Health screening, Ricca covering 2-8 PM" }
   ],
 
-  "expected_total": 108,
-  "expected_rt": 94,
-  "expected_ot": 14
+  "expected_total": 75.50,
+  "expected_rt": 75.50,
+  "expected_ot": 0,
+  "note": "Week 1 has 4 days with no clock data (Mar 15, 16, 18, 21). Actuals from timesheet.json rounded to .25."
 }

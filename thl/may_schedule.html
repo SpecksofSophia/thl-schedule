@@ -16,6 +16,8 @@
     --accent-border: rgba(232, 160, 80, 0.30);
     --accent-glow: rgba(232, 160, 80, 0.06);
     --ot-color: #f05050; --rt-color: #50c878;
+    --no-data: rgba(85, 93, 112, 0.15);
+    --no-data-border: rgba(85, 93, 112, 0.25);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; min-height: 100vh; }
@@ -32,10 +34,6 @@
   .hero-tags { display: flex; gap: 8px; margin-top: 6px; }
   .tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.8px; padding: 3px 10px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-dim); background: var(--surface); }
   .tag.ot-type { border-color: var(--accent-border); color: var(--accent); background: var(--accent-bg); }
-  .hero-right { text-align: right; }
-  .rate-display { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: var(--text); line-height: 1; }
-  .rate-display .symbol { color: var(--text-muted); font-weight: 400; font-size: 20px; }
-  .rate-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
   .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; text-align: center; }
   .stat-val { font-size: 28px; font-weight: 800; letter-spacing: -1px; line-height: 1; }
@@ -53,28 +51,25 @@
   .hours-cell { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; padding: 5px 12px; border-radius: 6px; font-family: 'DM Mono', monospace; font-weight: 500; font-size: 15px; }
   .hours-on { background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent); }
   .hours-off { color: var(--text-muted); opacity: 0.4; font-size: 12px; letter-spacing: 1px; }
+  .hours-nodata { background: var(--no-data); border: 1px solid var(--no-data-border); color: var(--text-muted); font-size: 12px; }
   .hours-ot { background: rgba(240,80,80,0.08); border: 1px solid rgba(240,80,80,0.25); color: var(--ot-color); }
   .rt-cell { color: var(--rt-color); font-family: 'DM Mono', monospace; font-weight: 500; }
   .ot-cell { color: var(--ot-color); font-family: 'DM Mono', monospace; font-weight: 500; }
+  .dim-cell { color: var(--text-muted); font-family: 'DM Mono', monospace; font-weight: 500; }
   .week-subtotal td { background: var(--surface-raised); border-bottom: 2px solid var(--border-light) !important; font-weight: 600; font-family: 'DM Mono', monospace; font-size: 13px; }
   .ot-section { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 32px; }
   .ot-title { font-size: 14px; font-weight: 600; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-  .ot-title .dot { width: 8px; height: 8px; border-radius: 2px; background: var(--ot-color); }
+  .ot-title .dot { width: 8px; height: 8px; border-radius: 2px; background: var(--rt-color); }
   .ot-bar-track { width: 100%; height: 24px; background: var(--surface-raised); border-radius: 6px; overflow: hidden; display: flex; margin-bottom: 12px; border: 1px solid var(--border); }
   .ot-bar-rt { height: 100%; background: linear-gradient(135deg, var(--rt-color), #3da866); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 600; color: #fff; }
-  .ot-bar-ot { height: 100%; background: linear-gradient(135deg, var(--ot-color), #d03030); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 600; color: #fff; }
   .ot-legend { display: flex; gap: 20px; font-family: 'DM Mono', monospace; font-size: 12px; }
   .ot-legend span { display: flex; align-items: center; gap: 6px; color: var(--text-dim); }
   .ot-legend .dot-rt { width: 8px; height: 8px; border-radius: 2px; background: var(--rt-color); }
-  .ot-legend .dot-ot { width: 8px; height: 8px; border-radius: 2px; background: var(--ot-color); }
-  .pay-card { background: var(--accent-glow); border: 1px solid var(--accent-border); border-radius: 10px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; }
-  .pay-card .pay-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
-  .pay-card .pay-amount { font-size: 36px; font-weight: 800; letter-spacing: -1px; color: var(--accent); }
-  .pay-card .pay-breakdown { text-align: right; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-dim); line-height: 1.8; }
-  .hero, .stats-row, .schedule-table, .ot-section, .pay-card { animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
-  .stats-row { animation-delay: 0.05s; } .schedule-table { animation-delay: 0.1s; } .ot-section { animation-delay: 0.15s; } .pay-card { animation-delay: 0.2s; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   .info-banner { background: rgba(232,160,80,0.08); border: 1px solid rgba(232,160,80,0.25); border-radius: 8px; padding: 12px 18px; margin-bottom: 24px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); }
+  .contact-banner { background: rgba(80,184,224,0.08); border: 1px solid rgba(80,184,224,0.25); border-radius: 8px; padding: 12px 18px; margin-bottom: 24px; font-family: 'DM Mono', monospace; font-size: 12px; color: #50b8e0; }
+  .hero, .stats-row, .schedule-table, .ot-section { animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .stats-row { animation-delay: 0.05s; } .schedule-table { animation-delay: 0.1s; } .ot-section { animation-delay: 0.15s; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
@@ -87,51 +82,51 @@
         <div class="hero-tags">
           <span class="tag">DSP</span>
           <span class="tag ot-type">Daily OT (8hr)</span>
-          <span class="tag">LTHL Pay Sched</span>
+          <span class="tag">$23/hr</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="info-banner">Works THL but on LTHL pay schedule (1st-15th, 16th-end). Covering for Lara.</div>
+  <div class="info-banner">Phase 2 schedule (Mar 22+): Sun 12-8 (8hrs), Mon-Fri 2-8 (6hrs), Sat OFF. Hours below from clock data rounded to .25.</div>
+  <div class="contact-banner">Questions about your hours? Text Anthony directly at (310) 407-9602. Not the timesheet bot.</div>
 
   <div class="stats-row">
-    <div class="stat-card highlight"><div class="stat-val" style="color:var(--accent)">108</div><div class="stat-lbl">Total Hours</div></div>
-    <div class="stat-card"><div class="stat-val" style="color:var(--rt-color)">94</div><div class="stat-lbl">Regular</div></div>
-    <div class="stat-card"><div class="stat-val" style="color:var(--ot-color)">14</div><div class="stat-lbl">Overtime</div></div>
+    <div class="stat-card highlight"><div class="stat-val" style="color:var(--accent)">51.50</div><div class="stat-lbl">Actual Hours</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:var(--rt-color)">51.50</div><div class="stat-lbl">Regular</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:var(--text-muted)">0</div><div class="stat-lbl">Overtime</div></div>
   </div>
 
-  <div class="section-label">Daily Schedule</div>
+  <div class="section-label">Daily Schedule — Actuals</div>
   <table class="schedule-table">
-    <thead><tr><th>Day</th><th>Date</th><th>Hours</th><th>RT</th><th>OT</th></tr></thead>
+    <thead><tr><th>Day</th><th>Date</th><th>Hours</th><th>In</th><th>Out</th></tr></thead>
     <tbody>
-      <tr><td class="day-name">Sun</td><td class="date-col">Mar 15</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr><td class="day-name">Mon</td><td class="date-col">Mar 16</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr><td class="day-name">Tue</td><td class="date-col">Mar 17</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr><td class="day-name">Wed</td><td class="date-col">Mar 18</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr><td class="day-name">Thu</td><td class="date-col">Mar 19</td><td><span class="hours-cell hours-ot">9</span></td><td class="rt-cell">8</td><td class="ot-cell">1</td></tr>
-      <tr><td class="day-name">Fri</td><td class="date-col">Mar 20</td><td><span class="hours-cell hours-ot">9</span></td><td class="rt-cell">8</td><td class="ot-cell">1</td></tr>
-      <tr><td class="day-name">Sat</td><td class="date-col">Mar 21</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr class="week-subtotal"><td colspan="2">Week 1</td><td>58</td><td style="color:var(--rt-color)">56</td><td style="color:var(--ot-color)">2</td></tr>
-      <tr><td class="day-name">Sun</td><td class="date-col">Mar 22</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr><td class="day-name">Mon</td><td class="date-col">Mar 23</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr><td class="day-name">Tue</td><td class="date-col">Mar 24</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr><td class="day-name">Wed</td><td class="date-col">Mar 25</td><td><span class="hours-cell hours-on">8</span></td><td class="rt-cell">8</td><td class="ot-cell">0</td></tr>
-      <tr><td class="day-name">Thu</td><td class="date-col">Mar 26</td><td><span class="hours-cell hours-ot">9</span></td><td class="rt-cell">8</td><td class="ot-cell">1</td></tr>
-      <tr><td class="day-name">Fri</td><td class="date-col">Mar 27</td><td><span class="hours-cell hours-ot">9</span></td><td class="rt-cell">8</td><td class="ot-cell">1</td></tr>
-      <tr class="week-subtotal"><td colspan="2">Week 2</td><td>50</td><td style="color:var(--rt-color)">48</td><td style="color:var(--ot-color)">2</td></tr>
+      <tr><td class="day-name">Sun</td><td class="date-col">Mar 15</td><td><span class="hours-cell hours-nodata">--</span></td><td class="dim-cell">--</td><td class="dim-cell">--</td></tr>
+      <tr><td class="day-name">Mon</td><td class="date-col">Mar 16</td><td><span class="hours-cell hours-nodata">--</span></td><td class="dim-cell">--</td><td class="dim-cell">--</td></tr>
+      <tr><td class="day-name">Tue</td><td class="date-col">Mar 17</td><td><span class="hours-cell hours-on">6.00</span></td><td class="dim-cell">14:00</td><td class="dim-cell">20:00</td></tr>
+      <tr><td class="day-name">Wed</td><td class="date-col">Mar 18</td><td><span class="hours-cell hours-nodata">--</span></td><td class="dim-cell">--</td><td class="dim-cell">--</td></tr>
+      <tr><td class="day-name">Thu</td><td class="date-col">Mar 19</td><td><span class="hours-cell hours-on">6.25</span></td><td class="dim-cell">13:45</td><td class="dim-cell">20:00</td></tr>
+      <tr><td class="day-name">Fri</td><td class="date-col">Mar 20</td><td><span class="hours-cell hours-on">6.25</span></td><td class="dim-cell">14:00</td><td class="dim-cell">20:15</td></tr>
+      <tr><td class="day-name">Sat</td><td class="date-col">Mar 21</td><td><span class="hours-cell hours-nodata">--</span></td><td class="dim-cell">--</td><td class="dim-cell">--</td></tr>
+      <tr class="week-subtotal"><td colspan="2">Week 1 (captured)</td><td>18.50</td><td colspan="2" style="color:var(--text-muted)">4 days no clock data</td></tr>
+
+      <tr><td class="day-name">Sun</td><td class="date-col">Mar 22</td><td><span class="hours-cell hours-on">8.00</span></td><td class="dim-cell">12:00</td><td class="dim-cell">20:00</td></tr>
+      <tr><td class="day-name">Mon</td><td class="date-col">Mar 23</td><td><span class="hours-cell hours-on">6.25</span></td><td class="dim-cell">13:45</td><td class="dim-cell">20:00</td></tr>
+      <tr><td class="day-name">Tue</td><td class="date-col">Mar 24</td><td><span class="hours-cell hours-on">6.25</span></td><td class="dim-cell">13:45</td><td class="dim-cell">20:00</td></tr>
+      <tr><td class="day-name">Wed</td><td class="date-col">Mar 25</td><td><span class="hours-cell hours-on">6.25</span></td><td class="dim-cell">13:45</td><td class="dim-cell">20:00</td></tr>
+      <tr><td class="day-name">Thu</td><td class="date-col">Mar 26</td><td><span class="hours-cell hours-on">6.25</span></td><td class="dim-cell">13:45</td><td class="dim-cell">20:00</td></tr>
+      <tr><td class="day-name">Fri</td><td class="date-col">Mar 27</td><td><span class="hours-cell hours-off">OFF</span></td><td colspan="2" style="color:var(--text-muted); font-size:11px; font-family:'DM Mono',monospace;">Health screening — Ricca covering</td></tr>
+      <tr class="week-subtotal"><td colspan="2">Week 2</td><td>33.00</td><td colspan="2"></td></tr>
     </tbody>
   </table>
 
   <div class="ot-section">
-    <div class="ot-title"><div class="dot"></div> OT Breakdown — Daily (over 8hr)</div>
+    <div class="ot-title"><div class="dot"></div> Hours Summary</div>
     <div class="ot-bar-track">
-      <div class="ot-bar-rt" style="width:87%">94 RT</div>
-      <div class="ot-bar-ot" style="width:13%">14</div>
+      <div class="ot-bar-rt" style="width:100%">51.50 RT</div>
     </div>
     <div class="ot-legend">
-      <span><span class="dot-rt"></span> Regular: 94 hrs</span>
-      <span><span class="dot-ot"></span> Overtime: 14 hrs (Thu/Fri 9hr days)</span>
+      <span><span class="dot-rt"></span> Regular: 51.50 hrs (all under 8/day)</span>
     </div>
   </div>
 </div>
