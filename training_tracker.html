@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Training Race — THL &amp; LTHL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+:root {
+  --bg: #0c0e12;
+  --bg-warm: #111318;
+  --surface: #181b22;
+  --surface-raised: #1e222b;
+  --surface-glow: #232830;
+  --text: #e8eaf0;
+  --text-mid: #9ca3b4;
+  --text-dim: #555d70;
+  --border: #2a2f3a;
+  --border-light: #363c4a;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --mono: 'DM Mono', monospace;
+  --display: 'Syne', sans-serif;
+  --body: 'DM Sans', system-ui, sans-serif;
+
+  --gold: #f0c040;
+  --gold-glow: rgba(240, 192, 64, 0.15);
+  --gold-border: rgba(240, 192, 64, 0.35);
+  --silver: #b0bec5;
+  --silver-glow: rgba(176, 190, 197, 0.12);
+  --bronze: #cd7f32;
+  --bronze-glow: rgba(205, 127, 50, 0.12);
+
+  --done: #34d399;
+  --done-glow: rgba(52, 211, 153, 0.12);
+  --done-border: rgba(52, 211, 153, 0.3);
+  --pending: #555d70;
+  --soon: #f59e0b;
+  --soon-glow: rgba(245, 158, 11, 0.1);
+}
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page { position: relative; z-index: 1; }
+.container { max-width: 520px; margin: 0 auto; padding: 0 16px; }
+
+/* ═══ REVEAL ANIMATION ═══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══ HERO ═══ */
+.hero {
+  padding: 48px 0 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(240, 192, 64, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.hero-badge .pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  margin-bottom: 12px;
+}
+
+.hero h1 .accent { color: var(--gold); }
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--text-mid);
+  max-width: 360px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ═══ COUNTDOWN ═══ */
+.countdown-strip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  margin: 0 16px 32px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.countdown-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.countdown-value {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--gold);
+}
+
+/* ═══ PRIZES ═══ */
+.prizes {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px 28px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.prize-card {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.prize-card.gold { border-color: var(--gold-border); background: linear-gradient(180deg, rgba(240, 192, 64, 0.06) 0%, var(--surface) 100%); }
+.prize-card.silver { border-color: rgba(176, 190, 197, 0.25); }
+.prize-card.bronze { border-color: rgba(205, 127, 50, 0.25); }
+
+.prize-place {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.prize-card.gold .prize-place { color: var(--gold); }
+.prize-card.silver .prize-place { color: var(--silver); }
+.prize-card.bronze .prize-place { color: var(--bronze); }
+
+.prize-name {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.prize-item {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ═══ LEADERBOARD ═══ */
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+  padding: 0 4px;
+}
+
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 32px;
+}
+
+.runner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.runner:hover {
+  border-color: var(--border-light);
+  background: var(--surface-raised);
+}
+
+.runner.rank-1 { border-color: var(--gold-border); background: linear-gradient(90deg, rgba(240, 192, 64, 0.05) 0%, var(--surface) 40%); }
+.runner.rank-2 { border-color: rgba(176, 190, 197, 0.2); }
+.runner.rank-3 { border-color: rgba(205, 127, 50, 0.2); }
+
+.runner-pos {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 20px;
+  min-width: 28px;
+  text-align: center;
+  line-height: 1;
+}
+
+.rank-1 .runner-pos { color: var(--gold); }
+.rank-2 .runner-pos { color: var(--silver); }
+.rank-3 .runner-pos { color: var(--bronze); }
+.runner:not(.rank-1):not(.rank-2):not(.rank-3) .runner-pos { color: var(--text-dim); font-size: 16px; }
+
+.runner-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.runner-info { flex: 1; min-width: 0; }
+
+.runner-name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.runner-facility {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+.runner-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.runner-entries {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.rank-1 .runner-entries { color: var(--gold); }
+.rank-2 .runner-entries { color: var(--silver); }
+.rank-3 .runner-entries { color: var(--bronze); }
+
+.runner-entries-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.runner-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rank-1 .runner-bar { background: var(--gold); }
+.rank-2 .runner-bar { background: var(--silver); }
+.rank-3 .runner-bar { background: var(--bronze); }
+.runner:not(.rank-1):not(.rank-2):not(.rank-3) .runner-bar { background: var(--done); }
+
+/* ═══ RUNNER COLORS ═══ */
+.c-mae .runner-avatar { background: rgba(96, 208, 160, 0.15); color: #60d0a0; }
+.c-ricca .runner-avatar { background: rgba(80, 184, 224, 0.15); color: #50b8e0; }
+.c-may .runner-avatar { background: rgba(232, 160, 80, 0.15); color: #e8a050; }
+.c-mele .runner-avatar { background: rgba(224, 96, 64, 0.15); color: #e06040; }
+.c-jaz .runner-avatar { background: rgba(192, 120, 224, 0.15); color: #c078e0; }
+.c-celia .runner-avatar { background: rgba(120, 200, 180, 0.15); color: #78c8b4; }
+.c-brenda .runner-avatar { background: rgba(200, 140, 180, 0.15); color: #c88cb4; }
+.c-anne .runner-avatar { background: rgba(140, 180, 220, 0.15); color: #8cb4dc; }
+.c-lara .runner-avatar { background: rgba(220, 180, 100, 0.15); color: #dcb464; }
+
+/* ═══ MODULES SECTION ═══ */
+.modules-section {
+  padding-bottom: 32px;
+}
+
+.module-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.module-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.module-status {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.module-status.live {
+  background: var(--done-glow);
+  border: 1px solid var(--done-border);
+  color: var(--done);
+}
+
+.module-status.soon {
+  background: var(--soon-glow);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: var(--soon);
+}
+
+.module-status.locked {
+  background: rgba(85, 93, 112, 0.1);
+  border: 1px solid rgba(85, 93, 112, 0.2);
+  color: var(--text-dim);
+}
+
+.module-info { flex: 1; }
+
+.module-name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.module-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+.module-count {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.module-count .done-num { color: var(--done); font-weight: 500; }
+
+/* ═══ TIMELINE ═══ */
+.timeline-section {
+  padding-bottom: 40px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--border);
+}
+
+.tl-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 10px 0;
+  position: relative;
+}
+
+.tl-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--done);
+  border: 2px solid var(--bg);
+  flex-shrink: 0;
+  margin-top: 4px;
+  margin-left: 14px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.3);
+}
+
+.tl-content { flex: 1; }
+
+.tl-name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.tl-detail {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 0.3px;
+}
+
+.tl-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* ═══ FOOTER ═══ */
+.footer {
+  text-align: center;
+  padding: 24px 16px 48px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+/* ═══ SPARKLE ═══ */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+.sparkle-container {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.rank-1 .sparkle-container .sparkle:nth-child(1) { top: 2px; left: 2px; animation: sparkle 2s ease-in-out infinite; }
+.rank-1 .sparkle-container .sparkle:nth-child(2) { top: 8px; left: 10px; animation: sparkle 2s ease-in-out 0.4s infinite; }
+.rank-1 .sparkle-container .sparkle:nth-child(3) { top: 0; left: 14px; animation: sparkle 2s ease-in-out 0.8s infinite; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 400px) {
+  .hero h1 { font-size: 30px; }
+  .prizes { gap: 6px; }
+  .prize-card { padding: 12px 6px; }
+  .runner { padding: 12px; gap: 10px; }
+  .runner-avatar { width: 34px; height: 34px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge reveal"><span class="pulse"></span> 2026 Training</div>
+    <h1 class="reveal" style="transition-delay:0.08s">The<br><span class="accent">Training Race</span></h1>
+    <p class="hero-sub reveal" style="transition-delay:0.16s">Complete trainings. Earn raffle entries. Win prizes at the year-end celebration.</p>
+  </div>
+</section>
+
+<!-- ═══ COUNTDOWN ═══ -->
+<div class="countdown-strip reveal" style="transition-delay:0.24s">
+  <span class="countdown-label">Year-End Celebration</span>
+  <span class="countdown-value" id="countdown">---</span>
+</div>
+
+<!-- ═══ PRIZES ═══ -->
+<div class="prizes">
+  <div class="prize-card gold reveal" style="transition-delay:0.3s">
+    <div class="prize-place">1st</div>
+    <div class="prize-name">Grand Prize</div>
+    <div class="prize-item">iPad</div>
+  </div>
+  <div class="prize-card silver reveal" style="transition-delay:0.36s">
+    <div class="prize-place">2nd</div>
+    <div class="prize-name">Runner Up</div>
+    <div class="prize-item">Electronics</div>
+  </div>
+  <div class="prize-card bronze reveal" style="transition-delay:0.42s">
+    <div class="prize-place">3rd</div>
+    <div class="prize-name">Third</div>
+    <div class="prize-item">Electronics</div>
+  </div>
+</div>
+
+<!-- ═══ LEADERBOARD ═══ -->
+<div class="container">
+  <div class="section-label reveal">Leaderboard</div>
+  <div class="leaderboard">
+
+    <!-- 1. Mae -->
+    <div class="runner rank-1 c-mae reveal" style="transition-delay:0.1s">
+      <div class="runner-pos">1</div>
+      <div class="runner-avatar">Ma</div>
+      <div class="runner-info">
+        <div class="runner-name">Mae Maglalang</div>
+        <div class="runner-facility">THL</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">4</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 33%"></div>
+      <div class="sparkle-container"><div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div></div>
+    </div>
+
+    <!-- 2. Ricca -->
+    <div class="runner rank-2 c-ricca reveal" style="transition-delay:0.16s">
+      <div class="runner-pos">2</div>
+      <div class="runner-avatar">Ri</div>
+      <div class="runner-info">
+        <div class="runner-name">Ricca Ilagan</div>
+        <div class="runner-facility">THL — Lead DSP</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">4</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 33%"></div>
+    </div>
+
+    <!-- 3. May -->
+    <div class="runner rank-3 c-may reveal" style="transition-delay:0.22s">
+      <div class="runner-pos">3</div>
+      <div class="runner-avatar">My</div>
+      <div class="runner-info">
+        <div class="runner-name">May Rioflorido</div>
+        <div class="runner-facility">THL / LTHL</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">4</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 33%"></div>
+    </div>
+
+    <!-- 4. Mele -->
+    <div class="runner c-mele reveal" style="transition-delay:0.28s">
+      <div class="runner-pos">4</div>
+      <div class="runner-avatar">Me</div>
+      <div class="runner-info">
+        <div class="runner-name">Mele Langa</div>
+        <div class="runner-facility">THL — Overnight</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">4</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 33%"></div>
+    </div>
+
+    <!-- 5. Jaz -->
+    <div class="runner c-jaz reveal" style="transition-delay:0.34s">
+      <div class="runner-pos">5</div>
+      <div class="runner-avatar">Jz</div>
+      <div class="runner-info">
+        <div class="runner-name">Jaz Cafuir</div>
+        <div class="runner-facility">THL</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">3</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 25%"></div>
+    </div>
+
+    <!-- 6. Celia -->
+    <div class="runner c-celia reveal" style="transition-delay:0.38s">
+      <div class="runner-pos">6</div>
+      <div class="runner-avatar">Ce</div>
+      <div class="runner-info">
+        <div class="runner-name">Celia Bugayong</div>
+        <div class="runner-facility">LTHL</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">3</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 25%"></div>
+    </div>
+
+    <!-- 7. Brenda -->
+    <div class="runner c-brenda reveal" style="transition-delay:0.42s">
+      <div class="runner-pos">7</div>
+      <div class="runner-avatar">Br</div>
+      <div class="runner-info">
+        <div class="runner-name">Brenda Ceralde</div>
+        <div class="runner-facility">LTHL</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">2</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 17%"></div>
+    </div>
+
+    <!-- 8. Anne -->
+    <div class="runner c-anne reveal" style="transition-delay:0.46s">
+      <div class="runner-pos">8</div>
+      <div class="runner-avatar">An</div>
+      <div class="runner-info">
+        <div class="runner-name">Anne Valera</div>
+        <div class="runner-facility">THL — RN</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">2</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 17%"></div>
+    </div>
+
+    <!-- 9. Lara -->
+    <div class="runner c-lara reveal" style="transition-delay:0.5s">
+      <div class="runner-pos">9</div>
+      <div class="runner-avatar">La</div>
+      <div class="runner-info">
+        <div class="runner-name">Lara Langa</div>
+        <div class="runner-facility">THL — Lead DSP (vacation)</div>
+      </div>
+      <div class="runner-stats">
+        <div class="runner-entries">2</div>
+        <div class="runner-entries-label">Entries</div>
+      </div>
+      <div class="runner-bar" style="width: 17%"></div>
+    </div>
+
+  </div>
+
+  <!-- ═══ TRAINING MODULES ═══ -->
+  <div class="modules-section">
+    <div class="section-label reveal">Training Modules — 12 Total</div>
+    <div class="module-list">
+
+      <div class="module-row reveal">
+        <div class="module-status live">&#10003;</div>
+        <div class="module-info">
+          <div class="module-name">SIR Reporting</div>
+          <div class="module-meta">Live — incident reporting</div>
+        </div>
+        <div class="module-count"><span class="done-num">4</span>/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status soon">&#9679;</div>
+        <div class="module-info">
+          <div class="module-name">P&amp;I Ledger</div>
+          <div class="module-meta">Coming soon</div>
+        </div>
+        <div class="module-count">0/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status live">&#10003;</div>
+        <div class="module-info">
+          <div class="module-name">CPR / BLS</div>
+          <div class="module-meta">Certificates on file</div>
+        </div>
+        <div class="module-count"><span class="done-num">9</span>/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status live">&#10003;</div>
+        <div class="module-info">
+          <div class="module-name">First Aid</div>
+          <div class="module-meta">Certificates on file</div>
+        </div>
+        <div class="module-count"><span class="done-num">5</span>/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status locked">&#8212;</div>
+        <div class="module-info">
+          <div class="module-name">Fall Prevention</div>
+          <div class="module-meta">Annual CEU</div>
+        </div>
+        <div class="module-count">0/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status locked">&#8212;</div>
+        <div class="module-info">
+          <div class="module-name">Emergency Drills</div>
+          <div class="module-meta">Annual CEU</div>
+        </div>
+        <div class="module-count">0/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status locked">&#8212;</div>
+        <div class="module-info">
+          <div class="module-name">Resident Rights</div>
+          <div class="module-meta">Annual CEU</div>
+        </div>
+        <div class="module-count">0/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status locked">&#8212;</div>
+        <div class="module-info">
+          <div class="module-name">HCBS Final Rule</div>
+          <div class="module-meta">Annual CEU</div>
+        </div>
+        <div class="module-count">0/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status locked">&#8212;</div>
+        <div class="module-info">
+          <div class="module-name">Person-Centered Care</div>
+          <div class="module-meta">Annual CEU</div>
+        </div>
+        <div class="module-count">0/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status locked">&#8212;</div>
+        <div class="module-info">
+          <div class="module-name">Standard Precautions</div>
+          <div class="module-meta">Annual CEU</div>
+        </div>
+        <div class="module-count">0/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status locked">&#8212;</div>
+        <div class="module-info">
+          <div class="module-name">Medication Administration</div>
+          <div class="module-meta">Annual CEU</div>
+        </div>
+        <div class="module-count">0/9</div>
+      </div>
+
+      <div class="module-row reveal">
+        <div class="module-status locked">&#8212;</div>
+        <div class="module-info">
+          <div class="module-name">Dementia Care</div>
+          <div class="module-meta">THL only — Annual CEU</div>
+        </div>
+        <div class="module-count">0/6</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <div class="timeline-section">
+    <div class="section-label reveal">Recent Completions</div>
+    <div class="timeline">
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-name">Mele Langa</div>
+          <div class="tl-detail">SIR Reporting</div>
+        </div>
+        <div class="tl-time">Mar 26 10:08p</div>
+      </div>
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-name">May Rioflorido</div>
+          <div class="tl-detail">SIR Reporting</div>
+        </div>
+        <div class="tl-time">Mar 26 2:25p</div>
+      </div>
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-name">Ricca Ilagan</div>
+          <div class="tl-detail">SIR Reporting</div>
+        </div>
+        <div class="tl-time">Mar 26 2:08p</div>
+      </div>
+      <div class="tl-entry reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-name">Mae Maglalang</div>
+          <div class="tl-detail">SIR Reporting</div>
+        </div>
+        <div class="tl-time">Mar 26 1:56p</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<section class="footer">
+  <p>THL &bull; LTHL &bull; Training Race 2026</p>
+  <p style="margin-top:4px">1 training completed = 1 raffle entry</p>
+</section>
+
+</div>
+
+<script>
+(function() {
+  // Reveal on scroll
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+  // Instant reveal for hero
+  requestAnimationFrame(function() {
+    document.querySelectorAll('.hero .reveal').forEach(function(el, i) {
+      setTimeout(function() { el.classList.add('visible'); }, i * 120);
+    });
+  });
+
+  // Countdown to Dec 31
+  function updateCountdown() {
+    var now = new Date();
+    var end = new Date(now.getFullYear(), 11, 31, 23, 59, 59);
+    var diff = end - now;
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var el = document.getElementById('countdown');
+    if (el) el.textContent = days + ' days left';
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+})();
+</script>
+</body>
+</html>
