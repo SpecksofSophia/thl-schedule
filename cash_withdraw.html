@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cash Receipt</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; background: #f5f5f5; }
+    .page { max-width: 400px; margin: 0 auto; padding: 20px; background: #fff; min-height: 100vh; }
+
+    .info {
+      border-bottom: 2px solid #000;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .name { font-size: 20px; font-weight: 700; }
+    .detail { font-size: 14px; color: #333; margin-top: 4px; }
+    .amount { font-size: 32px; font-weight: 700; margin-top: 4px; }
+
+    .sig-area {
+      border: 2px solid #000;
+      border-radius: 4px;
+      position: relative;
+      touch-action: none;
+      margin-bottom: 12px;
+    }
+    .sig-area canvas { display: block; width: 100%; cursor: crosshair; }
+    .sig-hint {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px; color: #aaa; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .sig-line {
+      position: absolute; bottom: 24px; left: 16px; right: 16px;
+      border-bottom: 1px solid #ccc; pointer-events: none;
+    }
+
+    .btns { display: flex; gap: 8px; }
+    .btn {
+      font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600;
+      padding: 12px; border: none; border-radius: 4px; cursor: pointer; flex: 1;
+    }
+    .btn-black { background: #000; color: #fff; }
+    .btn-gray { background: #e8e8e8; color: #000; }
+    .btn:active { opacity: 0.8; }
+    .btn:disabled { opacity: 0.3; }
+
+    .done { display: none; text-align: center; margin-top: 20px; }
+    .done img { max-width: 100%; border: 1px solid #ccc; margin-bottom: 12px; }
+    .check { font-size: 18px; font-weight: 600; color: #060; margin-bottom: 8px; }
+    .uploading { color: #666; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="info">
+      <div class="name" id="resName"></div>
+      <div class="amount" id="resAmount"></div>
+      <div class="detail" id="resDate"></div>
+    </div>
+
+    <div id="sigSection">
+      <div class="sig-area">
+        <canvas id="c" height="280"></canvas>
+        <span class="sig-hint" id="hint">Sign here</span>
+        <div class="sig-line"></div>
+      </div>
+      <div class="btns">
+        <button class="btn btn-gray" id="clearBtn">Clear</button>
+        <button class="btn btn-black" id="saveBtn" disabled>Done</button>
+      </div>
+    </div>
+
+    <div class="done" id="doneSection">
+      <div class="check" id="statusMsg">Uploading...</div>
+      <img id="receiptImg">
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js';
+    import { getStorage, ref, uploadBytes } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-storage.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBh-YchsxUnPaxdfFVde9EvPoChYjkB8zU",
+      authDomain: "renovs.firebaseapp.com",
+      databaseURL: "https://renovs-default-rtdb.firebaseio.com",
+      projectId: "renovs",
+      storageBucket: "renovs.firebasestorage.app",
+      messagingSenderId: "688236124007",
+      appId: "1:688236124007:web:2a16b5b8f559b34c0d41c2",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    // Parse URL
+    const p = new URLSearchParams(location.search);
+    const name = p.get('n') || 'Resident';
+    const amount = parseFloat(p.get('a') || '0').toFixed(2);
+    const fac = p.get('f') || 'THL';
+    const sender = p.get('by') || '';
+    const txnId = p.get('txn') || '';
+    const now = new Date();
+    const date = now.toLocaleDateString('en-US', {month:'2-digit',day:'2-digit',year:'numeric'});
+    const time = now.toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'});
+
+    document.getElementById('resName').textContent = name;
+    document.getElementById('resAmount').textContent = '$' + amount;
+    document.getElementById('resDate').textContent = date + '  ' + time;
+
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    let drawing = false, signed = false;
+
+    function init() {
+      const w = canvas.parentElement.getBoundingClientRect().width;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = w * dpr;
+      canvas.height = 280 * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = '280px';
+      ctx.scale(dpr, dpr);
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = '#000';
+    }
+    init();
+
+    function pos(e) {
+      const r = canvas.getBoundingClientRect();
+      const t = e.touches ? e.touches[0] : e;
+      return { x: t.clientX - r.left, y: t.clientY - r.top };
+    }
+
+    function down(e) { e.preventDefault(); drawing = true; const xy = pos(e); ctx.beginPath(); ctx.moveTo(xy.x, xy.y); }
+    function move(e) {
+      if (!drawing) return; e.preventDefault();
+      const xy = pos(e); ctx.lineTo(xy.x, xy.y); ctx.stroke();
+      if (!signed) { signed = true; document.getElementById('hint').style.opacity = '0'; document.getElementById('saveBtn').disabled = false; }
+    }
+    function up() { drawing = false; }
+
+    canvas.addEventListener('mousedown', down);
+    canvas.addEventListener('mousemove', move);
+    canvas.addEventListener('mouseup', up);
+    canvas.addEventListener('mouseleave', up);
+    canvas.addEventListener('touchstart', down, {passive:false});
+    canvas.addEventListener('touchmove', move, {passive:false});
+    canvas.addEventListener('touchend', up);
+
+    document.getElementById('clearBtn').onclick = function() {
+      const dpr = window.devicePixelRatio || 1;
+      ctx.clearRect(0, 0, canvas.width/dpr, canvas.height/dpr);
+      signed = false;
+      document.getElementById('hint').style.opacity = '1';
+      document.getElementById('saveBtn').disabled = true;
+    };
+
+    document.getElementById('saveBtn').onclick = async function() {
+      const saveBtn = document.getElementById('saveBtn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+
+      const facName = fac === 'LTHL' ? 'LIFELONG TONOPAH HOME LIVING' : 'TONOPAH HOME LIVING';
+
+      // Build receipt PNG
+      const rc = document.createElement('canvas');
+      rc.width = 380; rc.height = 280;
+      const rx = rc.getContext('2d');
+      rx.fillStyle = '#fff'; rx.fillRect(0, 0, 380, 280);
+
+      rx.fillStyle = '#000';
+      rx.font = '700 14px Outfit, sans-serif';
+      rx.fillText(facName, 16, 24);
+      rx.font = '400 11px Outfit, sans-serif';
+      rx.fillStyle = '#333';
+      rx.fillText('P&I Cash Receipt', 16, 40);
+      rx.strokeStyle = '#000'; rx.lineWidth = 1.5;
+      rx.beginPath(); rx.moveTo(16, 48); rx.lineTo(364, 48); rx.stroke();
+
+      rx.fillStyle = '#000';
+      const rows = [['Resident', name], ['Amount', '$' + amount], ['Date', date + '  ' + time]];
+      let y = 68;
+      for (const [l, v] of rows) {
+        rx.font = '600 11px Outfit, sans-serif'; rx.fillText(l, 16, y);
+        rx.font = '400 12px Outfit, sans-serif'; rx.fillText(v, 90, y);
+        y += 20;
+      }
+
+      y += 6;
+      rx.strokeStyle = '#000'; rx.lineWidth = 0.5;
+      rx.beginPath(); rx.moveTo(16, y); rx.lineTo(364, y); rx.stroke();
+      y += 14;
+      rx.font = '600 10px Outfit, sans-serif'; rx.fillText('SIGNATURE', 16, y);
+      y += 6;
+      rx.drawImage(canvas, 16, y, 200, 70);
+
+      rx.fillStyle = '#999'; rx.font = '400 8px Outfit, sans-serif';
+      if (sender) rx.fillText('Sender: ' + sender, 16, 270);
+      if (txnId) rx.fillText('TXN: ' + txnId.slice(0,8), 16, 278);
+      rx.fillText(date + ' ' + time, 260, 270);
+
+      const url = rc.toDataURL('image/png');
+      document.getElementById('receiptImg').src = url;
+      document.getElementById('sigSection').style.display = 'none';
+      document.getElementById('doneSection').style.display = 'block';
+
+      // Upload to Firebase Storage
+      const filename = txnId ? 'cash_' + txnId + '.png' : 'cash_' + name.toLowerCase() + '_' + now.toISOString().slice(0,10) + '.png';
+      const statusMsg = document.getElementById('statusMsg');
+
+      try {
+        const blob = await new Promise(resolve => rc.toBlob(resolve, 'image/png'));
+        const storageRef = ref(storage, 'signatures/' + filename);
+        await uploadBytes(storageRef, blob, { contentType: 'image/png' });
+        statusMsg.textContent = 'Saved';
+        statusMsg.className = 'check';
+      } catch (err) {
+        console.error('Upload failed:', err);
+        statusMsg.textContent = 'Saved locally';
+        statusMsg.className = 'check';
+        // Fallback: offer download
+        const dl = document.createElement('a');
+        dl.href = url;
+        dl.download = filename;
+        dl.className = 'btn btn-black';
+        dl.style.cssText = 'display:block;text-align:center;text-decoration:none;margin-top:12px;';
+        dl.textContent = 'Download';
+        document.getElementById('doneSection').appendChild(dl);
+      }
+    };
+  </script>
+</body>
+</html>

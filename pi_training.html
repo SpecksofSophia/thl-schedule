@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>P&I Cash Handling — THL &amp; LTHL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+:root {
+  --bg: #FAF7F2;
+  --bg-warm: #F5F0E8;
+  --surface: #FFFFFF;
+  --text: #1C1917;
+  --text-mid: #57534E;
+  --text-dim: #A8A29E;
+  --border: #E7E5E4;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --mono: 'DM Mono', monospace;
+  --display: 'Syne', sans-serif;
+  --body: 'DM Sans', system-ui, sans-serif;
+  --cash: #16A34A;
+  --spend: #7C3AED;
+  --tg: #229ED9;
+  --tg-dark: #1B2836;
+  --tg-bubble: #8774E1;
+  --tg-surface: #212D3B;
+}
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page { position: relative; z-index: 1; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+h1, h2, h3 { font-family: var(--display); letter-spacing: -0.03em; }
+h1 { font-size: clamp(2.8rem, 8vw, 4.5rem); font-weight: 800; line-height: 0.95; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; line-height: 1.15; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══ HERO ═══ */
+.hero {
+  padding: 100px 0 60px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-mid);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cash);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(22,163,74,0); }
+}
+.hero h1 { margin-bottom: 20px; }
+.hero h1 .accent { color: var(--cash); }
+.hero-sub {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  color: var(--text-mid);
+  max-width: 520px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* ═══ TELEGRAM MOCKUP ═══ */
+.tg-phone {
+  max-width: 360px;
+  margin: 0 auto;
+  background: var(--tg-dark);
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+.tg-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 12px;
+}
+.tg-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--tg-bubble);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+}
+.tg-name {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+}
+.tg-status {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+.tg-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 8px;
+}
+.tg-msg {
+  max-width: 85%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #fff;
+}
+.tg-msg.bot {
+  background: var(--tg-surface);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+.tg-msg.user {
+  background: var(--tg-bubble);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.tg-msg .time {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  float: right;
+  margin-left: 8px;
+  margin-top: 2px;
+}
+.tg-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.tg-btn {
+  background: rgba(135,116,225,0.15);
+  border: 1px solid rgba(135,116,225,0.3);
+  color: var(--tg-bubble);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--body);
+}
+.tg-btn.active {
+  background: var(--tg-bubble);
+  color: #fff;
+  border-color: var(--tg-bubble);
+}
+.tg-link {
+  color: #5B9BD5;
+  font-size: 11px;
+  word-break: break-all;
+  text-decoration: underline;
+}
+.tg-resident-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+.tg-resident-btn {
+  background: rgba(135,116,225,0.15);
+  border: 1px solid rgba(135,116,225,0.3);
+  color: var(--tg-bubble);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--body);
+  text-align: center;
+}
+
+/* ═══ SIGNATURE MOCKUP ═══ */
+.sig-mockup {
+  max-width: 360px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+.sig-mockup .name { font-family: var(--display); font-weight: 700; font-size: 18px; }
+.sig-mockup .amount { font-family: var(--display); font-weight: 700; font-size: 28px; margin: 4px 0; color: var(--cash); }
+.sig-mockup .date { font-size: 12px; color: var(--text-mid); }
+.sig-mockup .divider {
+  height: 3px;
+  background: #000;
+  margin: 12px 0 16px;
+}
+.sig-mockup .saved-label {
+  text-align: center;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--cash);
+  margin-bottom: 16px;
+}
+.sig-mockup .receipt-card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  background: #fff;
+}
+.sig-mockup .receipt-header {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+.sig-mockup .receipt-sub {
+  font-size: 10px;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+}
+.sig-mockup .receipt-line {
+  height: 1.5px;
+  background: #000;
+  margin: 6px 0 10px;
+}
+.sig-mockup .receipt-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 4px;
+  font-size: 11px;
+}
+.sig-mockup .receipt-row .label {
+  font-weight: 700;
+  min-width: 60px;
+}
+.sig-mockup .receipt-sig-label {
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 10px 0 4px;
+}
+.sig-mockup .receipt-sig {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.sig-mockup .receipt-sig svg { width: 160px; height: 50px; }
+.sig-mockup .receipt-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 8px;
+  color: var(--text-dim);
+}
+.sig-mockup .receipt-footer .txn { font-family: var(--mono); }
+
+/* ═══ STEP SECTIONS ═══ */
+.steps-section {
+  padding: 40px 0 60px;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-header p {
+  color: var(--text-mid);
+  font-size: 1.05rem;
+  margin-top: 10px;
+}
+
+.step-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.step-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.step-row.reverse { direction: rtl; }
+.step-row.reverse > * { direction: ltr; }
+@media (max-width: 680px) {
+  .step-row, .step-row.reverse { grid-template-columns: 1fr; direction: ltr; }
+  .step-row.reverse > * { direction: ltr; }
+}
+
+.step-text {
+  padding: 8px 0;
+}
+.step-number {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.step-number.cash-color { color: var(--cash); }
+.step-number.spend-color { color: var(--spend); }
+.step-number.tg-color { color: var(--tg); }
+.step-text h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+.step-text p {
+  color: var(--text-mid);
+  font-size: 0.95rem;
+}
+
+/* ═══ METHOD CARDS ═══ */
+.methods-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+@media (max-width: 520px) {
+  .methods-grid { grid-template-columns: 1fr; }
+}
+.method-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 22px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+}
+.method-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+.method-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.method-card.cash::before { background: var(--cash); }
+.method-card.spend::before { background: var(--spend); }
+.method-card.text-dump::before { background: var(--tg); }
+.method-card.receipt::before { background: #EA580C; }
+.method-card .card-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 14px;
+}
+.method-card .card-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+.method-card.cash .card-title { color: var(--cash); }
+.method-card.spend .card-title { color: var(--spend); }
+.method-card.text-dump .card-title { color: var(--tg); }
+.method-card.receipt .card-title { color: #EA580C; }
+.method-card .card-desc {
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.method-card .card-example {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: var(--bg-warm);
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text);
+}
+
+/* ═══ RULES SECTION ═══ */
+.rules-section {
+  padding: 40px 0 60px;
+}
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.rule-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px 18px;
+}
+.rule-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.rule-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+.rule-desc {
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  line-height: 1.45;
+}
+
+/* ═══ BANNER ═══ */
+.banner {
+  margin: 0 20px 60px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+}
+.banner h2 { color: #fff; margin-bottom: 10px; }
+.banner p {
+  color: rgba(255,255,255,0.65);
+  font-size: 1.05rem;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+/* ═══ FOOTER ═══ */
+.footer {
+  padding: 40px 0;
+  text-align: center;
+}
+.footer p {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ═══ PRINT ═══ */
+@media print {
+  body { background: #fff; font-size: 11pt; }
+  body::after { display: none; }
+  .hero { padding: 24px 0; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .tg-phone { box-shadow: none; border: 2px solid #ccc; }
+  .sig-mockup { box-shadow: none; border: 2px solid #ccc; }
+  .method-card:hover { transform: none; box-shadow: none; }
+  .banner { background: #333; }
+  @page { margin: 0.5in; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .hero { padding: 72px 0 40px; }
+  .method-card { padding: 24px 18px; }
+  .banner { margin: 0 16px 40px; padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge reveal"><span class="dot"></span> Staff Training</div>
+    <h1 class="reveal" style="transition-delay:0.08s">P&I Cash<br><span class="accent">Handling</span></h1>
+    <p class="hero-sub reveal" style="transition-delay:0.16s">How to use @PILedgersBot to log resident spending, cash withdrawals, and receipts. Every dollar accounted for.</p>
+  </div>
+</section>
+
+<!-- ═══ 4 METHODS ═══ -->
+<section class="steps-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>4 Ways to Log</h2>
+      <p>Pick the method that fits the situation. All entries are withdrawals.</p>
+    </div>
+
+    <div class="methods-grid">
+
+      <div class="method-card cash reveal" style="transition-delay:0.06s">
+        <div class="card-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="48" height="48" rx="12" fill="#DCFCE7"/>
+            <path d="M28 16v24M22 22c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6 2.7-6 6 2.7 6 6 6" stroke="#16A34A" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-title">Cash</div>
+        <div class="card-desc">Giving cash to a resident. Requires their <strong>signature</strong> on the receipt.</div>
+        <div class="card-example">/start &rarr; THL &rarr; Bonnie &rarr; Cash &rarr; 20.00</div>
+      </div>
+
+      <div class="method-card spend reveal" style="transition-delay:0.09s">
+        <div class="card-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="48" height="48" rx="12" fill="#F5F3FF"/>
+            <rect x="12" y="20" width="32" height="20" rx="4" fill="#7C3AED" opacity="0.2"/>
+            <rect x="12" y="16" width="32" height="12" rx="4" fill="#7C3AED"/>
+            <rect x="16" y="32" width="12" height="4" rx="2" fill="#7C3AED" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="card-title">Spend</div>
+        <div class="card-desc">Staff bought something for a resident. Describe what it was.</div>
+        <div class="card-example">/start &rarr; THL &rarr; Bonnie &rarr; Spend &rarr; 12.50 &rarr; McDonalds</div>
+      </div>
+
+      <div class="method-card text-dump reveal" style="transition-delay:0.12s">
+        <div class="card-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="48" height="48" rx="12" fill="#E0F2FE"/>
+            <path d="M16 20h24M16 28h18M16 36h22" stroke="#229ED9" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-title">Text Dump</div>
+        <div class="card-desc">Quick entry. Just type the name, amount, and what it was. No buttons needed.</div>
+        <div class="card-example">bonnie 12.50 mcdonalds lunch</div>
+      </div>
+
+      <div class="method-card receipt reveal" style="transition-delay:0.15s">
+        <div class="card-icon">
+          <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="48" height="48" rx="12" fill="#FFF7ED"/>
+            <rect x="14" y="10" width="28" height="36" rx="4" fill="#EA580C" opacity="0.15"/>
+            <path d="M14 10h28v36l-4-3-4 3-4-3-4 3-4-3-4 3-4-3V10z" fill="#FDBA74" opacity="0.3"/>
+            <rect x="20" y="18" width="16" height="3" rx="1.5" fill="#EA580C" opacity="0.5"/>
+            <rect x="20" y="24" width="12" height="3" rx="1.5" fill="#EA580C" opacity="0.5"/>
+            <rect x="20" y="30" width="14" height="3" rx="1.5" fill="#EA580C" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="card-title">Receipt Photo</div>
+        <div class="card-desc">Send a photo of the receipt with the <strong>resident name as caption</strong>. Auto-links to last transaction.</div>
+        <div class="card-example">Send photo + caption: Bonnie</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASH FLOW ═══ -->
+<section class="steps-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Cash Withdrawal Flow</h2>
+      <p>Resident gets cash. Every dollar needs a signature.</p>
+    </div>
+
+    <div class="step-flow">
+
+      <!-- Step 1: Start -->
+      <div class="step-row reveal">
+        <div class="tg-phone">
+          <div class="tg-header">
+            <div class="tg-avatar">P</div>
+            <div>
+              <div class="tg-name">PILedgersBot</div>
+              <div class="tg-status">bot</div>
+            </div>
+          </div>
+          <div class="tg-chat">
+            <div class="tg-msg bot">P&I Ledger <span class="time">6:01</span>
+              <div class="tg-buttons">
+                <span class="tg-btn active">THL</span>
+                <span class="tg-btn">LTHL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-text">
+          <div class="step-number cash-color">Step 1</div>
+          <h3>Send /start</h3>
+          <p>Open @PILedgersBot and send <strong>/start</strong>. Choose the facility.</p>
+        </div>
+      </div>
+
+      <!-- Step 2: Select Resident -->
+      <div class="step-row reverse reveal">
+        <div class="tg-phone">
+          <div class="tg-header">
+            <div class="tg-avatar">P</div>
+            <div>
+              <div class="tg-name">PILedgersBot</div>
+              <div class="tg-status">bot</div>
+            </div>
+          </div>
+          <div class="tg-chat">
+            <div class="tg-msg bot">THL: <span class="time">6:01</span>
+              <div class="tg-resident-grid">
+                <span class="tg-resident-btn">Bonnie</span>
+                <span class="tg-resident-btn">Sherry</span>
+                <span class="tg-resident-btn">Amber</span>
+                <span class="tg-resident-btn">Judy</span>
+                <span class="tg-resident-btn">Joann</span>
+                <span class="tg-resident-btn">Sarah</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-text">
+          <div class="step-number cash-color">Step 2</div>
+          <h3>Pick the Resident</h3>
+          <p>Tap their name. You'll see their <strong>current balance</strong>.</p>
+        </div>
+      </div>
+
+      <!-- Step 3: Cash + Amount -->
+      <div class="step-row reveal">
+        <div class="tg-phone">
+          <div class="tg-header">
+            <div class="tg-avatar">P</div>
+            <div>
+              <div class="tg-name">PILedgersBot</div>
+              <div class="tg-status">bot</div>
+            </div>
+          </div>
+          <div class="tg-chat">
+            <div class="tg-msg bot">Bonnie -- $376.31 <span class="time">6:01</span>
+              <div class="tg-buttons">
+                <span class="tg-btn active">Cash</span>
+                <span class="tg-btn">Spend</span>
+              </div>
+            </div>
+            <div class="tg-msg bot">Amount (x.xx): <span class="time">6:01</span></div>
+            <div class="tg-msg user">20.00 <span class="time">6:01</span></div>
+          </div>
+        </div>
+        <div class="step-text">
+          <div class="step-number cash-color">Step 3</div>
+          <h3>Tap Cash, Enter Amount</h3>
+          <p>Choose <strong>Cash</strong>, then type the amount. Bot logs the withdrawal and sends a signature link.</p>
+        </div>
+      </div>
+
+      <!-- Step 4: Signature + Saved Receipt -->
+      <div class="step-row reverse reveal">
+        <div class="sig-mockup">
+          <div class="name">Bonnie</div>
+          <div class="amount">$20.00</div>
+          <div class="date">03/26/2026  06:01 PM</div>
+          <div class="divider"></div>
+          <div class="saved-label">Saved</div>
+          <div class="receipt-card">
+            <div class="receipt-header">TONOPAH HOME LIVING</div>
+            <div class="receipt-sub">P&I Cash Receipt</div>
+            <div class="receipt-line"></div>
+            <div class="receipt-row"><span class="label">Resident</span><span>Bonnie</span></div>
+            <div class="receipt-row"><span class="label">Amount</span><span>$20.00</span></div>
+            <div class="receipt-row"><span class="label">Date</span><span>03/26/2026  06:01 PM</span></div>
+            <div class="receipt-sig-label">Signature</div>
+            <div class="receipt-sig">
+              <svg viewBox="0 0 160 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 38 C15 18, 22 42, 35 22 C42 10, 48 35, 62 18 C70 8, 78 30, 92 14 C100 6, 105 25, 120 16 C128 10, 132 22, 148 15" stroke="#000" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="receipt-footer">
+              <div>
+                <div>Sender: 7511779474</div>
+                <div class="txn">TXN: 07b268f1</div>
+              </div>
+              <div>03/26/2026 06:01 PM</div>
+            </div>
+          </div>
+        </div>
+        <div class="step-text">
+          <div class="step-number cash-color">Step 4</div>
+          <h3>Resident Signs, Receipt Saved</h3>
+          <p>Open the link. Resident signs on screen. Tap <strong>Done</strong>. The receipt saves with the facility header, signature, and transaction ID. Download it to send back to the bot.</p>
+        </div>
+      </div>
+
+      <!-- Step 5: Send back -->
+      <div class="step-row reveal">
+        <div class="tg-phone">
+          <div class="tg-header">
+            <div class="tg-avatar">P</div>
+            <div>
+              <div class="tg-name">PILedgersBot</div>
+              <div class="tg-status">bot</div>
+            </div>
+          </div>
+          <div class="tg-chat">
+            <div class="tg-msg bot" style="padding:12px">
+              Bonnie (THL): -$20.00<br>
+              Balance: $356.31<br><br>
+              Signature:<br>
+              <span class="tg-link">https://specksofsophia.github.io/cash/?n=Bonnie&a=20.00&f=THL&txn=07b2...</span>
+              <span class="time">6:01</span>
+            </div>
+            <div class="tg-msg bot">Signature saved: cash_07b2...png <span class="time">6:02</span></div>
+          </div>
+        </div>
+        <div class="step-text">
+          <div class="step-number cash-color">Step 5</div>
+          <h3>Send Receipt Back</h3>
+          <p>Send the downloaded PNG back to the bot. It saves to the signatures folder, matched by transaction ID. <strong>Audit complete.</strong></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SPEND FLOW ═══ -->
+<section class="steps-section" style="background: var(--bg-warm); padding: 60px 0;">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Spend Flow</h2>
+      <p>Staff bought something for a resident. No signature needed.</p>
+    </div>
+
+    <div class="step-row reveal" style="max-width: 600px; margin: 0 auto;">
+      <div class="tg-phone">
+        <div class="tg-header">
+          <div class="tg-avatar">P</div>
+          <div>
+            <div class="tg-name">PILedgersBot</div>
+            <div class="tg-status">bot</div>
+          </div>
+        </div>
+        <div class="tg-chat">
+          <div class="tg-msg bot">Bonnie -- $376.31 <span class="time">6:05</span>
+            <div class="tg-buttons">
+              <span class="tg-btn">Cash</span>
+              <span class="tg-btn active">Spend</span>
+            </div>
+          </div>
+          <div class="tg-msg bot">Amount (x.xx): <span class="time">6:05</span></div>
+          <div class="tg-msg user">12.50 <span class="time">6:05</span></div>
+          <div class="tg-msg bot">What for? <span class="time">6:05</span></div>
+          <div class="tg-msg user">McDonalds lunch <span class="time">6:05</span></div>
+          <div class="tg-msg bot">
+            Bonnie (THL): -$12.50<br>
+            McDonalds lunch<br>
+            Balance: $363.81
+            <span class="time">6:05</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-text">
+        <div class="step-number spend-color">Spend</div>
+        <h3>Amount &rarr; Description &rarr; Done</h3>
+        <p>Choose <strong>Spend</strong>, enter the amount, describe what was purchased. No categories, no extra steps.</p>
+        <p style="margin-top:12px"><strong>Even faster:</strong> skip all buttons and just type:</p>
+        <div class="card-example" style="margin-top:8px; background:var(--surface); padding:10px 14px; border-radius:10px;">bonnie 12.50 mcdonalds lunch</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RULES ═══ -->
+<section class="rules-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Rules</h2>
+    </div>
+    <div class="rules-grid">
+      <div class="rule-item reveal" style="transition-delay:0.06s">
+        <div class="rule-icon">&#9997;</div>
+        <div class="rule-title">Cash = Signature</div>
+        <div class="rule-desc">Every cash withdrawal requires the resident's signature on the receipt. No exceptions.</div>
+      </div>
+      <div class="rule-item reveal" style="transition-delay:0.09s">
+        <div class="rule-icon">&#128247;</div>
+        <div class="rule-title">Keep Receipts</div>
+        <div class="rule-desc">Send photos of store receipts to the bot with the resident's name. They auto-link to the transaction.</div>
+      </div>
+      <div class="rule-item reveal" style="transition-delay:0.12s">
+        <div class="rule-icon">&#128176;</div>
+        <div class="rule-title">Check Balance First</div>
+        <div class="rule-desc">The bot shows the balance before any withdrawal. If it's low, notify Anthony.</div>
+      </div>
+      <div class="rule-item reveal" style="transition-delay:0.15s">
+        <div class="rule-icon">&#128274;</div>
+        <div class="rule-title">Their Money</div>
+        <div class="rule-desc">P&I funds belong to the resident. Every dollar must be accounted for and spent on them.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BANNER ═══ -->
+<div class="banner reveal">
+  <h2>Log it when it happens.</h2>
+  <p>Don't wait until end of shift. The bot takes 10 seconds. If you forget, the balance will be wrong and we can't fix it.</p>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<section class="footer">
+  <div class="container">
+    <p>THL &bull; LTHL &bull; @PILedgersBot &bull; P&I Cash Handling</p>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 140);
+    });
+  });
+})();
+</script>
+</body>
+</html>
