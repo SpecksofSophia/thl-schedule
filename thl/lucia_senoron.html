@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Lucia Senoron — THL Schedule</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0c0e12;--surface:#151820;--surface-raised:#1c2029;--border:#2a2f3a;--text:#e8eaf0;--text-dim:#8891a4;--text-muted:#555d70;--accent:#a04070;--ot:#f05050;--rt:#50c878}
+:root{--bg:#0c0e12;--surface:#151820;--surface-raised:#1c2029;--border:#2a2f3a;--text:#e8eaf0;--text-dim:#8891a4;--text-muted:#555d70;--accent:#a04070;--ot:#f05050;--rt:#50c878;--warn:#e8a050}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
 .page{max-width:860px;margin:0 auto;padding:28px 20px 60px}
@@ -26,10 +26,10 @@ th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border)}
 th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:var(--surface-raised)}
 td.h{text-align:right;font-weight:600;color:var(--accent);white-space:nowrap}
 td.s{color:var(--text-dim);font-size:12px}
-.raw{font-size:10px;color:var(--text-muted);font-weight:400;margin-left:4px}
 tr.off td{color:var(--text-muted)}tr.off td.h{color:var(--text-muted)}
 tr.in-progress{background:#a0407011}tr.in-progress td.h{color:var(--accent)}
 tr.scheduled td.h{color:var(--text-dim);font-style:italic}
+tr.left-early td.h{color:var(--warn)}
 .footer{margin-top:24px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.5px;line-height:1.6}
 </style></head>
 <body><div class="page">
@@ -57,5 +57,5 @@ tr.scheduled td.h{color:var(--text-dim);font-style:italic}
     <tr class="off"><td>Sun 04/12</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
     <tr class="off"><td>Mon 04/13</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
     <tr class="off"><td>Tue 04/14</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr></tbody></table>
-<div class="footer">Hours = scheduled when actual within 1.5h; else rounded actual · Generated 2026-04-13T14:57:17</div>
+<div class="footer">Pay policy: scheduled hrs, capped at scheduled · Left early (>1h under) = paid actual · Generated 2026-04-13T15:13:53</div>
 </div></body></html>

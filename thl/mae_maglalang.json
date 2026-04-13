@@ -18,10 +18,10 @@
       "in": "07:51",
       "out": "15:21",
       "actual_raw": 7.5,
-      "hours": 9,
+      "hours": 7.5,
       "status": "actual",
-      "paid_as": "scheduled",
-      "note": "paid 9h scheduled (actual 7.5h)"
+      "paid_as": "left_early",
+      "note": "LEFT EARLY — paid actual 7.5h (scheduled was 9h)"
     },
     {
       "date": "2026-04-01",
@@ -31,7 +31,7 @@
       "actual_raw": 8.1,
       "hours": 7,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 7h scheduled (actual 8.1h)"
     },
     {
@@ -72,8 +72,8 @@
       "actual_raw": 7.2,
       "hours": 7.0,
       "status": "actual",
-      "paid_as": "rounded_actual",
-      "note": "actual 7.2h rounded to 7.0h (scheduled 10h)"
+      "paid_as": "left_early",
+      "note": "LEFT EARLY — paid actual 7.0h (scheduled was 10h)"
     },
     {
       "date": "2026-04-08",
@@ -83,7 +83,7 @@
       "actual_raw": 9.93,
       "hours": 10,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 10h scheduled (actual 9.93h)"
     },
     {
@@ -94,7 +94,7 @@
       "actual_raw": 9.92,
       "hours": 10,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 10h scheduled (actual 9.92h)"
     },
     {
@@ -129,10 +129,10 @@
       "scheduled": "07:00-17:00"
     }
   ],
-  "expected_rt": 46.0,
-  "expected_ot": 7,
-  "expected_total": 53.0,
-  "expected_pay": 1243.0,
+  "expected_rt": 45.5,
+  "expected_ot": 6,
+  "expected_total": 51.5,
+  "expected_pay": 1199.0,
   "today": {
     "date": "2026-04-13",
     "day": "Mon",
@@ -146,6 +146,6 @@
     "status": "scheduled",
     "scheduled": "07:00-17:00"
   },
-  "policy": "pay scheduled when actual within 1.5h",
-  "generated": "2026-04-13T14:57:17"
+  "policy": "cap at scheduled; pay actual if left early (>1h under)",
+  "generated": "2026-04-13T15:13:53"
 }

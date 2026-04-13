@@ -14,7 +14,7 @@
       "actual_raw": 8.02,
       "hours": 8,
       "status": "actual",
-      "paid_as": "scheduled"
+      "paid_as": "scheduled_capped"
     },
     {
       "date": "2026-03-31",
@@ -24,7 +24,7 @@
       "actual_raw": 8.03,
       "hours": 8,
       "status": "actual",
-      "paid_as": "scheduled"
+      "paid_as": "scheduled_capped"
     },
     {
       "date": "2026-04-01",
@@ -46,7 +46,7 @@
       "actual_raw": 8.15,
       "hours": 8,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 8h scheduled (actual 8.15h)"
     },
     {
@@ -57,7 +57,7 @@
       "actual_raw": 8.05,
       "hours": 8,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 8h scheduled (actual 8.05h)"
     },
     {
@@ -68,7 +68,7 @@
       "actual_raw": 8.05,
       "hours": 8,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 8h scheduled (actual 8.05h)"
     },
     {
@@ -79,7 +79,7 @@
       "actual_raw": 8.05,
       "hours": 8,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 8h scheduled (actual 8.05h)"
     },
     {
@@ -90,7 +90,7 @@
       "actual_raw": 8.15,
       "hours": 8,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 8h scheduled (actual 8.15h)"
     },
     {
@@ -113,7 +113,7 @@
       "actual_raw": 12.05,
       "hours": 12,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 12h scheduled (actual 12.05h)"
     },
     {
@@ -124,19 +124,19 @@
       "actual_raw": 11.73,
       "hours": 12,
       "status": "actual",
-      "paid_as": "scheduled",
+      "paid_as": "scheduled_capped",
       "note": "paid 12h scheduled (actual 11.73h)"
     },
     {
       "date": "2026-04-12",
       "day": "Sun",
       "in": "06:55",
-      "out": "20:08",
-      "actual_raw": 13.22,
+      "out": "19:05",
+      "actual_raw": 12.17,
       "hours": 12,
       "status": "actual",
-      "paid_as": "scheduled",
-      "note": "paid 12h scheduled (actual 13.22h)"
+      "paid_as": "scheduled_capped",
+      "note": "paid 12h scheduled (actual 12.17h)"
     },
     {
       "date": "2026-04-13",
@@ -175,6 +175,6 @@
     "hours": 0,
     "status": "off"
   },
-  "policy": "pay scheduled when actual within 1.5h",
-  "generated": "2026-04-13T14:57:17"
+  "policy": "cap at scheduled; pay actual if left early (>1h under)",
+  "generated": "2026-04-13T15:13:53"
 }
