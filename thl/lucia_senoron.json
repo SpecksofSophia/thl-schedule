@@ -27,20 +27,29 @@
     {
       "date": "2026-04-02",
       "day": "Thu",
-      "hours": 0,
-      "status": "off"
+      "hours": 10,
+      "status": "assumed_worked",
+      "scheduled": "22:00-08:00",
+      "paid_as": "scheduled_no_clock",
+      "note": "no clock — paid scheduled 10h per regular pattern"
     },
     {
       "date": "2026-04-03",
       "day": "Fri",
-      "hours": 0,
-      "status": "off"
+      "hours": 10,
+      "status": "assumed_worked",
+      "scheduled": "22:00-08:00",
+      "paid_as": "scheduled_no_clock",
+      "note": "no clock — paid scheduled 10h per regular pattern"
     },
     {
       "date": "2026-04-04",
       "day": "Sat",
-      "hours": 0,
-      "status": "off"
+      "hours": 4,
+      "status": "assumed_worked",
+      "scheduled": "17:00-21:00",
+      "paid_as": "scheduled_no_clock",
+      "note": "no clock — paid scheduled 4h per regular pattern"
     },
     {
       "date": "2026-04-05",
@@ -103,10 +112,10 @@
       "status": "off"
     }
   ],
-  "expected_rt": 0,
-  "expected_ot": 0,
-  "expected_total": 0,
-  "expected_pay": 0.0,
+  "expected_rt": 20,
+  "expected_ot": 4,
+  "expected_total": 24,
+  "expected_pay": 546.0,
   "today": {
     "date": "2026-04-13",
     "day": "Mon",
@@ -119,6 +128,6 @@
     "hours": 0,
     "status": "off"
   },
-  "policy": "cap at scheduled; pay actual if left early (>1h under)",
-  "generated": "2026-04-13T15:13:53"
+  "policy": "cap at scheduled; left early=actual; past no-clock=scheduled assumed",
+  "generated": "2026-04-13T15:56:31"
 }

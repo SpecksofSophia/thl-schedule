@@ -173,6 +173,6 @@
     "status": "scheduled",
     "scheduled": "22:00-08:00"
   },
-  "policy": "cap at scheduled; pay actual if left early (>1h under)",
-  "generated": "2026-04-13T15:13:53"
+  "policy": "cap at scheduled; left early=actual; past no-clock=scheduled assumed",
+  "generated": "2026-04-13T15:56:31"
 }

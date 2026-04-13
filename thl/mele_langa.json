@@ -59,8 +59,11 @@
     {
       "date": "2026-04-04",
       "day": "Sat",
-      "hours": 0,
-      "status": "off"
+      "hours": 10,
+      "status": "assumed_worked",
+      "scheduled": "22:00-08:00",
+      "paid_as": "scheduled_no_clock",
+      "note": "no clock — paid scheduled 10h per regular pattern"
     },
     {
       "date": "2026-04-05",
@@ -144,9 +147,9 @@
     }
   ],
   "expected_rt": 70.0,
-  "expected_ot": 8.0,
-  "expected_total": 78.0,
-  "expected_pay": 1517.0,
+  "expected_ot": 18.0,
+  "expected_total": 88.0,
+  "expected_pay": 1794.5,
   "today": {
     "date": "2026-04-13",
     "day": "Mon",
@@ -159,6 +162,6 @@
     "hours": 0,
     "status": "off"
   },
-  "policy": "cap at scheduled; pay actual if left early (>1h under)",
-  "generated": "2026-04-13T15:13:53"
+  "policy": "cap at scheduled; left early=actual; past no-clock=scheduled assumed",
+  "generated": "2026-04-13T15:56:31"
 }
