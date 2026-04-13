@@ -121,15 +121,15 @@
     {
       "date": "2026-04-14",
       "day": "Tue",
-      "hours": 3,
+      "hours": 10,
       "status": "scheduled",
-      "scheduled": "22:00-01:00"
+      "scheduled": "22:00-08:00"
     }
   ],
-  "expected_rt": 83,
-  "expected_ot": 12.85,
-  "expected_total": 95.85,
-  "expected_pay": 2147.78,
+  "expected_rt": 88,
+  "expected_ot": 14.85,
+  "expected_total": 102.85,
+  "expected_pay": 2315.78,
   "today": {
     "date": "2026-04-13",
     "day": "Mon",
@@ -140,9 +140,9 @@
   "tomorrow": {
     "date": "2026-04-14",
     "day": "Tue",
-    "hours": 3,
+    "hours": 10,
     "status": "scheduled",
-    "scheduled": "22:00-01:00"
+    "scheduled": "22:00-08:00"
   },
-  "generated": "2026-04-13T13:40:31"
+  "generated": "2026-04-13T13:59:23"
 }
