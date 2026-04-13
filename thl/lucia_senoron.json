@@ -1,37 +1,123 @@
 {
   "staff": "Lucia Senoron",
   "facility": "THL",
-  "period": "Mar 15 - Mar 29, 2026",
-  "rate": 21.00,
+  "period": "Mar 30 - Apr 14, 2026",
+  "rate": 21.0,
   "ot_type": "daily",
-  "ot_note": "Thu/Fri/Sat only. Mele clocks in for her Thu night.",
-  "weekly_pattern": "Thu 10, Fri 12, Sat 5 = 27/wk",
-
-  "prior_period_adjustment": {
-    "shift": "2/27 Fri 10PM → 2/28 Sat AM till night",
-    "total_shift_hours": 17,
-    "already_paid": 2,
-    "adjustment_hours": 15,
-    "rt": 8,
-    "ot": 7,
-    "reason": "Overnight shift crossed pay period boundary. 2h logged on 02/27 in prior period (paid). Remaining 15h on 02/28 never logged. Lucia flagged on paper.",
-    "source": "Lucia handwritten paycheck/schedule review 03/15/26"
-  },
-
+  "ot_rate": 31.5,
   "entries": [
-    { "date": "2026-02-28", "day": "Sat", "hours": 15, "status": "prior_period_adj", "note": "2/27 Fri 10PM → 2/28 Sat — 17h total, 2h already paid in prior period, 15h owed" },
-    { "date": "2026-03-19", "day": "Thu", "hours": 10, "status": "scheduled" },
-    { "date": "2026-03-20", "day": "Fri", "hours": 12, "status": "scheduled" },
-    { "date": "2026-03-21", "day": "Sat", "hours": 5,  "status": "scheduled" },
-
-    { "date": "2026-03-26", "day": "Thu", "hours": 10, "status": "scheduled" },
-    { "date": "2026-03-27", "day": "Fri", "hours": 12, "status": "scheduled" },
-    { "date": "2026-03-28", "day": "Sat", "hours": 5,  "status": "scheduled" }
+    {
+      "date": "2026-03-30",
+      "day": "Mon",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-03-31",
+      "day": "Tue",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-01",
+      "day": "Wed",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-02",
+      "day": "Thu",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-03",
+      "day": "Fri",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-04",
+      "day": "Sat",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-05",
+      "day": "Sun",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-06",
+      "day": "Mon",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-07",
+      "day": "Tue",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-08",
+      "day": "Wed",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-09",
+      "day": "Thu",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-10",
+      "day": "Fri",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-11",
+      "day": "Sat",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-12",
+      "day": "Sun",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-13",
+      "day": "Mon",
+      "hours": 0,
+      "status": "off"
+    },
+    {
+      "date": "2026-04-14",
+      "day": "Tue",
+      "hours": 0,
+      "status": "off"
+    }
   ],
-
-  "expected_total": 69,
-  "expected_rt": 50,
-  "expected_ot": 19,
-  "note": "Mar 28 Sat is the last Lucia day in this period. Period ends 03/29 per ADP.",
-  "includes_prior_adj": "15 hrs from 2/27-2/28 shift (17h total - 2h already paid)"
+  "expected_rt": 0,
+  "expected_ot": 0,
+  "expected_total": 0,
+  "expected_pay": 0.0,
+  "today": {
+    "date": "2026-04-13",
+    "day": "Mon",
+    "hours": 0,
+    "status": "off"
+  },
+  "tomorrow": {
+    "date": "2026-04-14",
+    "day": "Tue",
+    "hours": 0,
+    "status": "off"
+  },
+  "generated": "2026-04-13T13:40:31"
 }

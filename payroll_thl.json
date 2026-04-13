@@ -1,104 +1,48 @@
 {
-  "period": "THL Mar 15 - Mar 29, 2026",
+  "period": "THL Mar 30 - Apr 14, 2026",
   "facility": "THL",
   "status": "IN PROGRESS",
-  "notes": "Mele has 8 OT hours rolled over from Mar 9 week (pays this check). Lara on vacation. Mae Tue-Thu only, 8-10 hrs depending on day. THL semi-monthly runs 1 day behind: 15th-29th / last-14th. Payroll due 03/30, check 03/31.",
+  "notes": "Mele + Lucia OUT starting Apr 9 (overnight crisis). May overnight checkpoint Apr 6. Mae OUT Apr 2 (biometrics, Mele covering). May at $21/hr confirmed. Lara on vacation through mid-April.",
 
   "ot_tracked": {
     "weekly": ["Mele Langa"],
     "daily": "all others — daily OT over 8hrs per day"
   },
 
+  "staff": {
+    "Mele Langa": { "rate": 18.50, "ot_type": "weekly", "notes": "Overnight. Working through Apr 8. OUT Apr 9 - May 11." },
+    "Ricca Ilagan": { "rate": 21.00, "ot_type": "daily", "notes": "Lead DSP. Covers overnight Sun-Wed starting Apr 9." },
+    "Jaz Cafuir": { "rate": 21.00, "ot_type": "daily", "notes": "DSP. Mon back on schedule." },
+    "Mae Maglalang": { "rate": 22.00, "ot_type": "daily", "notes": "Tue-Thu only. OUT Apr 2 (biometrics)." },
+    "May Rioflorido": { "rate": 21.00, "ot_type": "daily", "notes": "DSP. Moves out of LTHL Apr 3, Ubers from Fullerton to THL. THL only going forward. Overnight Thu-Sat starting Apr 9 if checkpoint passes." },
+    "Lucia Senoron": { "rate": 21.00, "ot_type": "daily", "notes": "Thu-Sat. Working through Apr 8. OUT Apr 9 - May 9." }
+  },
+
+  "key_dates": {
+    "2026-04-02": "Mae OUT — biometrics. Mele covering.",
+    "2026-04-03": "May last day at LTHL residence.",
+    "2026-04-06": "May overnight checkpoint — Ricca assessment.",
+    "2026-04-09": "Mele + Lucia OUT. Overnight crisis begins.",
+    "2026-04-14": "Period ends. Payroll due ~04/15."
+  },
+
   "entries": [
-    {"_comment": "=== PRIOR PERIOD ADJUSTMENT — Lucia Senoron ==="},
-    { "date": "2026-02-28", "day": "Sat", "staff": "Lucia Senoron", "facility": "THL", "hours": 15, "note": "Prior period adj: 17h shift (2/27 10PM → 2/28 night) minus 2h already paid in prior period. Lucia flagged 03/15." },
+    { "staff": "May Rioflorido",  "date": "2026-03-30", "in": "13:45", "out": "20:03", "hours": 6.30, "source": "telegram_location" },
+    { "staff": "May Rioflorido",  "date": "2026-03-31", "in": "13:54", "out": "20:03", "hours": 6.15, "source": "telegram_location" },
+    { "staff": "May Rioflorido",  "date": "2026-04-01", "in": "13:49", "out": "20:03", "hours": 6.23, "source": "telegram_location" },
+    { "staff": "May Rioflorido",  "date": "2026-04-02", "in": "13:43", "out": "20:04", "hours": 6.35, "source": "telegram_location" },
+    { "staff": "May Rioflorido",  "date": "2026-04-03", "in": "13:51", "out": null,    "hours": null, "source": "telegram_location", "note": "missing OUT — verify with May/Ricca" },
+    { "staff": "May Rioflorido",  "date": "2026-04-05", "in": "13:15", "out": "20:01", "hours": 6.77, "source": "telegram_location" },
+    { "staff": "May Rioflorido",  "date": "2026-04-06", "in": "13:48", "out": "20:02", "hours": 6.23, "source": "telegram_location" },
+    { "staff": "May Rioflorido",  "date": "2026-04-08", "in": "13:40", "out": "22:02", "hours": 8.37, "source": "telegram_location", "note": "late/extended shift" },
+    { "staff": "May Rioflorido",  "date": "2026-04-09", "in": "21:53", "out": null,    "hours": null, "source": "telegram_location", "note": "OVERNIGHT — bridge down 22:05 Apr 9 to 09:42 Apr 10, OUT missed. Verify with May (likely ~07:00 Apr 10)." },
 
-    {"_comment": "=== Week 1: Mar 15 (Sun) - Mar 21 (Sat) ==="},
-
-    { "date": "2026-03-15", "day": "Sun", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-15", "day": "Sun", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-15", "day": "Sun", "staff": "Jaz Cafuir", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-15", "day": "Sun", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-
-    { "date": "2026-03-16", "day": "Mon", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-16", "day": "Mon", "staff": "Ricca Ilagan", "facility": "THL", "hours": 12 },
-    { "date": "2026-03-16", "day": "Mon", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-
-    { "date": "2026-03-17", "day": "Tue", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-17", "day": "Tue", "staff": "Jaz Cafuir", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-17", "day": "Tue", "staff": "Mae Maglalang", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-17", "day": "Tue", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-
-    { "date": "2026-03-18", "day": "Wed", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-18", "day": "Wed", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-18", "day": "Wed", "staff": "Mae Maglalang", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-18", "day": "Wed", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-
-    { "date": "2026-03-19", "day": "Thu", "staff": "Mele Langa", "facility": "THL", "hours": 0 },
-    { "date": "2026-03-19", "day": "Thu", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-19", "day": "Thu", "staff": "Mae Maglalang", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-19", "day": "Thu", "staff": "May Rioflorido", "facility": "THL", "hours": 9 },
-    { "date": "2026-03-19", "day": "Thu", "staff": "Lucia Senoron", "facility": "THL", "hours": 10 },
-
-    { "date": "2026-03-20", "day": "Fri", "staff": "Mele Langa", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-20", "day": "Fri", "staff": "Jaz Cafuir", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-20", "day": "Fri", "staff": "May Rioflorido", "facility": "THL", "hours": 9 },
-    { "date": "2026-03-20", "day": "Fri", "staff": "Lucia Senoron", "facility": "THL", "hours": 12 },
-
-    { "date": "2026-03-21", "day": "Sat", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-21", "day": "Sat", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-21", "day": "Sat", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-21", "day": "Sat", "staff": "Lucia Senoron", "facility": "THL", "hours": 5 },
-
-    {"_comment": "=== Week 2: Mar 22 (Sun) - Mar 27 (Fri) ==="},
-
-    { "date": "2026-03-22", "day": "Sun", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-22", "day": "Sun", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-22", "day": "Sun", "staff": "Jaz Cafuir", "facility": "THL", "hours": 8 },
-
-    { "date": "2026-03-23", "day": "Mon", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-23", "day": "Mon", "staff": "Ricca Ilagan", "facility": "THL", "hours": 12 },
-    { "date": "2026-03-23", "day": "Mon", "staff": "Jaz Cafuir", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-23", "day": "Mon", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-
-    { "date": "2026-03-24", "day": "Tue", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-24", "day": "Tue", "staff": "Jaz Cafuir", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-24", "day": "Tue", "staff": "Mae Maglalang", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-24", "day": "Tue", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-
-    { "date": "2026-03-25", "day": "Wed", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-25", "day": "Wed", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-25", "day": "Wed", "staff": "Mae Maglalang", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-25", "day": "Wed", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-
-    { "date": "2026-03-26", "day": "Thu", "staff": "Mele Langa", "facility": "THL", "hours": 0 },
-    { "date": "2026-03-26", "day": "Thu", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-26", "day": "Thu", "staff": "Mae Maglalang", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-26", "day": "Thu", "staff": "May Rioflorido", "facility": "THL", "hours": 9 },
-    { "date": "2026-03-26", "day": "Thu", "staff": "Lucia Senoron", "facility": "THL", "hours": 10 },
-
-    { "date": "2026-03-27", "day": "Fri", "staff": "Mele Langa", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-27", "day": "Fri", "staff": "Jaz Cafuir", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-27", "day": "Fri", "staff": "May Rioflorido", "facility": "THL", "hours": 9 },
-    { "date": "2026-03-27", "day": "Fri", "staff": "Lucia Senoron", "facility": "THL", "hours": 12 },
-
-    {"_comment": "=== Mar 28-29 (Sat-Sun) — period extends to 03/29 per ADP ==="},
-    { "date": "2026-03-28", "day": "Sat", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-28", "day": "Sat", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-28", "day": "Sat", "staff": "May Rioflorido", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-28", "day": "Sat", "staff": "Lucia Senoron", "facility": "THL", "hours": 5 },
-
-    { "date": "2026-03-29", "day": "Sun", "staff": "Mele Langa", "facility": "THL", "hours": 10 },
-    { "date": "2026-03-29", "day": "Sun", "staff": "Ricca Ilagan", "facility": "THL", "hours": 8 },
-    { "date": "2026-03-29", "day": "Sun", "staff": "Jaz Cafuir", "facility": "THL", "hours": 8 }
-  ],
-
-  "expected_totals": {
-    "Mele Langa": "~116 hrs (58+58) + 8 OT rollover from last period",
-    "Ricca Ilagan": "~88 hrs",
-    "Jaz Cafuir": "~48 hrs (Tue/Fri/Sun × 8)",
-    "Mae Maglalang": "~48 hrs (Tue-Thu × 8-10, two weeks)",
-    "May Rioflorido": "~100 hrs (Mon-Sat, LTHL schedule)",
-    "Lucia Senoron": "~69 hrs (54 scheduled + 15 prior period adj from 2/27-2/28 shift, 2h already paid)"
-  }
+    { "staff": "Jaz Cafuir",      "date": "2026-03-30", "in": "14:14", "out": "22:15", "hours": 8.02, "source": "telegram_location" },
+    { "staff": "Jaz Cafuir",      "date": "2026-03-31", "in": "14:05", "out": "22:07", "hours": 8.03, "source": "telegram_location" },
+    { "staff": "Jaz Cafuir",      "date": "2026-04-03", "in": "14:04", "out": null,    "hours": null, "source": "telegram_location", "note": "missing OUT — verify with Jaz" },
+    { "staff": "Jaz Cafuir",      "date": "2026-04-04", "in": "13:57", "out": null,    "hours": null, "source": "telegram_location", "note": "missing OUT — verify with Jaz" },
+    { "staff": "Jaz Cafuir",      "date": "2026-04-05", "in": "14:00", "out": "22:03", "hours": 8.05, "source": "telegram_location" },
+    { "staff": "Jaz Cafuir",      "date": "2026-04-06", "in": "14:02", "out": "22:05", "hours": 8.05, "source": "telegram_location" },
+    { "staff": "Jaz Cafuir",      "date": "2026-04-07", "in": "13:57", "out": "22:06", "hours": 8.15, "source": "telegram_location" }
+  ]
 }

@@ -1,76 +1,26 @@
 {
-  "period": "LTHL Mar 16 - Mar 31, 2026",
+  "period": "LTHL Apr 1 - Apr 15, 2026",
   "facility": "LTHL",
   "status": "IN PROGRESS",
-  "notes": "Lara on vacation — check return date. Celia weekly OT (40hr threshold). May on LTHL schedule but works THL.",
+  "notes": "May no longer at LTHL (moves out Apr 3, Ubers from Fullerton to THL). Araceli out since 03/23 — return TBD (May leaving should resolve). Celia carrying solo weekdays. Lara on vacation. CARRYOVER: Celia has 18h (Mon 3/30 + Tue 3/31) from old period toward the Mar 30 - Apr 5 OT week. First week in new period: 22 RT + 20 OT.",
 
   "ot_tracked": {
     "weekly": ["Celia Bugayong"],
     "daily": "all others — daily OT over 8hrs per day"
   },
 
-  "entries": [
-    {"_comment": "=== Week 1: Mar 16 (Mon) - Mar 21 (Sat) ==="},
+  "staff": {
+    "Celia Bugayong": { "rate": 21.75, "ot_type": "weekly", "notes": "Live-in. 60hr/wk standard. Solo weekday coverage until Araceli returns." },
+    "Araceli Abauto": { "rate": 18.90, "ot_type": "daily", "notes": "Out since 03/23 (stress/May situation). Return TBD — May leaving should resolve." },
+    "Brenda Ceralde": { "rate": 19.00, "ot_type": "daily", "notes": "Saturdays." },
+    "Ed Belisario": { "rate": 19.00, "ot_type": "daily", "notes": "Sundays." }
+  },
 
-    { "date": "2026-03-16", "day": "Mon", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-16", "day": "Mon", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
+  "key_dates": {
+    "2026-04-01": "Period starts.",
+    "2026-04-03": "May leaves LTHL. Araceli return possible after this.",
+    "2026-04-15": "Period ends."
+  },
 
-    { "date": "2026-03-17", "day": "Tue", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-17", "day": "Tue", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-18", "day": "Wed", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-18", "day": "Wed", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-19", "day": "Thu", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 8 },
-    { "date": "2026-03-19", "day": "Thu", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-20", "day": "Fri", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-20", "day": "Fri", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-21", "day": "Sat", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 8 },
-    { "date": "2026-03-21", "day": "Sat", "staff": "Brenda Ceralde", "facility": "LTHL", "hours": 9 },
-
-    {"_comment": "=== Week 2: Mar 22 (Sun) - Mar 28 (Sat) ==="},
-
-    { "date": "2026-03-22", "day": "Sun", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 8 },
-    { "date": "2026-03-22", "day": "Sun", "staff": "Ed Belisario", "facility": "LTHL", "hours": 9 },
-
-    { "date": "2026-03-23", "day": "Mon", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-23", "day": "Mon", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-24", "day": "Tue", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-24", "day": "Tue", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-25", "day": "Wed", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-25", "day": "Wed", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-26", "day": "Thu", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 8 },
-    { "date": "2026-03-26", "day": "Thu", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-27", "day": "Fri", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-27", "day": "Fri", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-28", "day": "Sat", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 8 },
-    { "date": "2026-03-28", "day": "Sat", "staff": "Brenda Ceralde", "facility": "LTHL", "hours": 9 },
-
-    {"_comment": "=== Week 3 (partial): Mar 29 (Sun) - Mar 31 (Tue) ==="},
-
-    { "date": "2026-03-29", "day": "Sun", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 8 },
-    { "date": "2026-03-29", "day": "Sun", "staff": "Ed Belisario", "facility": "LTHL", "hours": 9 },
-
-    { "date": "2026-03-30", "day": "Mon", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-30", "day": "Mon", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 },
-
-    { "date": "2026-03-31", "day": "Tue", "staff": "Celia Bugayong", "facility": "LTHL", "hours": 9 },
-    { "date": "2026-03-31", "day": "Tue", "staff": "Araceli Abauto", "facility": "LTHL", "hours": 8 }
-  ],
-
-  "expected_totals": {
-    "Celia Bugayong": "~139 hrs (60+60+19 partial week) — weekly OT",
-    "Araceli Abauto": "~96 hrs (40+40+16 partial week)",
-    "Ed Belisario": "~18 hrs (Sun × 2)",
-    "Brenda Ceralde": "~18 hrs (Sat × 2)",
-    "May Rioflorido": "on THL file, LTHL schedule — check for any LTHL split hours",
-    "Lara": "on vacation — TBD return date"
-  }
+  "entries": []
 }
