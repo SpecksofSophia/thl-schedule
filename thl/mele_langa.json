@@ -63,7 +63,7 @@
       "status": "assumed_worked",
       "scheduled": "22:00-08:00",
       "paid_as": "scheduled_no_clock",
-      "note": "no clock — paid scheduled 10h per regular pattern"
+      "note": "no clock — paid 10h per regular schedule"
     },
     {
       "date": "2026-04-05",
@@ -162,6 +162,6 @@
     "hours": 0,
     "status": "off"
   },
-  "policy": "cap at scheduled; left early=actual; past no-clock=scheduled assumed",
-  "generated": "2026-04-13T15:56:31"
+  "policy": "cap at scheduled; left early=actual; past no-clock=scheduled",
+  "generated": "2026-04-13T16:01:46"
 }
