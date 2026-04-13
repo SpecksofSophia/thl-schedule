@@ -22,10 +22,12 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-
 .td-card h3{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px}
 .td-card .h{font-size:22px;font-weight:700}.td-card .d{font-size:12px;color:var(--text-dim);margin-top:4px}
 table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border);font-size:13px;table-layout:fixed}
-th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:middle}
-th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:var(--surface-raised)}th:nth-child(1),td:nth-child(1){width:34%}th:nth-child(2),td:nth-child(2){width:20%;text-align:center}th:nth-child(3),td:nth-child(3){width:24%;text-align:center}th:nth-child(4),td:nth-child(4){width:22%}
-td.h{text-align:right;font-weight:600;color:var(--accent);white-space:nowrap}
-
+th,td{padding:10px 12px;border-bottom:1px solid var(--border)}
+th:nth-child(1),td:nth-child(1){width:30%;text-align:left}
+th:nth-child(2),td:nth-child(2),th:nth-child(3),td:nth-child(3){width:25%;text-align:center}
+th:nth-child(4),td:nth-child(4){width:20%;text-align:right}
+th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:var(--surface-raised)}
+td.h{font-weight:600;color:var(--accent);white-space:nowrap}
 tr.off td{color:var(--text-muted)}tr.off td.h{color:var(--text-muted)}
 tr.in-progress{background:#c0502e11}tr.in-progress td.h{color:var(--accent)}
 tr.scheduled td.h{color:var(--text-dim);font-style:italic}
@@ -41,21 +43,21 @@ tr.left-early td.h{color:var(--warn)}
 <div class="todays"><div class="td-card"><h3>Today (Mon 04/13)</h3><div class="h">0h</div><div class="d">off</div></div>
 <div class="td-card"><h3>Tomorrow (Tue 04/14)</h3><div class="h">0h</div><div class="d">off</div></div></div>
 <table><thead><tr><th>Day</th><th>In</th><th>Out</th><th>Hrs</th></tr></thead>
-<tbody><tr class=""><td>Mon 03/30</td><td>22:01</td><td>08:34 (+1d)</td><td class="h">10</td></tr>
-    <tr class=""><td>Tue 03/31</td><td>22:02</td><td>08:25 (+1d)</td><td class="h">10</td></tr>
-    <tr class=""><td>Wed 04/01</td><td>22:01</td><td>08:23 (+1d)</td><td class="h">10</td></tr>
+<tbody><tr class=""><td>Mon 03/30</td><td>22:00</td><td>08:00</td><td class="h">10</td></tr>
+    <tr class=""><td>Tue 03/31</td><td>22:00</td><td>08:00</td><td class="h">10</td></tr>
+    <tr class=""><td>Wed 04/01</td><td>22:00</td><td>08:00</td><td class="h">10</td></tr>
     <tr class="off"><td>Thu 04/02</td><td>—</td><td>—</td><td class="h">0</td></tr>
-    <tr class=""><td>Fri 04/03</td><td>07:03</td><td>15:07</td><td class="h">8</td></tr>
-    <tr class="scheduled"><td>Sat 04/04</td><td>—</td><td>—</td><td class="h">10</td></tr>
-    <tr class=""><td>Sun 04/05</td><td>22:02</td><td>08:20 (+1d)</td><td class="h">10</td></tr>
-    <tr class=""><td>Mon 04/06</td><td>22:02</td><td>08:05 (+1d)</td><td class="h">10</td></tr>
-    <tr class=""><td>Tue 04/07</td><td>22:01</td><td>08:05 (+1d)</td><td class="h">10</td></tr>
-    <tr class=""><td>Wed 04/08</td><td>22:02</td><td>08:12 (+1d)</td><td class="h">10</td></tr>
+    <tr class=""><td>Fri 04/03</td><td>07:00</td><td>15:00</td><td class="h">8</td></tr>
+    <tr class="scheduled"><td>Sat 04/04</td><td>22:00</td><td>08:00</td><td class="h">10</td></tr>
+    <tr class=""><td>Sun 04/05</td><td>22:00</td><td>08:00</td><td class="h">10</td></tr>
+    <tr class=""><td>Mon 04/06</td><td>22:00</td><td>08:00</td><td class="h">10</td></tr>
+    <tr class=""><td>Tue 04/07</td><td>22:00</td><td>08:00</td><td class="h">10</td></tr>
+    <tr class=""><td>Wed 04/08</td><td>22:00</td><td>08:00</td><td class="h">10</td></tr>
     <tr class="off"><td>Thu 04/09</td><td>—</td><td>—</td><td class="h">0</td></tr>
     <tr class="off"><td>Fri 04/10</td><td>—</td><td>—</td><td class="h">0</td></tr>
     <tr class="off"><td>Sat 04/11</td><td>—</td><td>—</td><td class="h">0</td></tr>
     <tr class="off"><td>Sun 04/12</td><td>—</td><td>—</td><td class="h">0</td></tr>
     <tr class="off"><td>Mon 04/13</td><td>—</td><td>—</td><td class="h">0</td></tr>
     <tr class="off"><td>Tue 04/14</td><td>—</td><td>—</td><td class="h">0</td></tr></tbody></table>
-<div class="footer">Pay: scheduled capped · Left early = actual · No-clock past = scheduled · Generated 2026-04-13T16:01:46</div>
+<div class="footer">Hours shown at scheduled times. Generated 2026-04-13T16:01:46</div>
 </div></body></html>
