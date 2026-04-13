@@ -20,16 +20,14 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-
 .todays{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
 .td-card{background:var(--surface-raised);border:1px solid #7b4daf44;border-radius:10px;padding:14px}
 .td-card h3{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px}
-.td-card .h{font-size:22px;font-weight:700}
-.td-card .d{font-size:12px;color:var(--text-dim);margin-top:4px}
+.td-card .h{font-size:22px;font-weight:700}.td-card .d{font-size:12px;color:var(--text-dim);margin-top:4px}
 table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border);font-size:13px}
 th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border)}
 th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:var(--surface-raised)}
 td.h{text-align:right;font-weight:600;color:var(--accent);white-space:nowrap}
 td.s{color:var(--text-dim);font-size:12px}
 .raw{font-size:10px;color:var(--text-muted);font-weight:400;margin-left:4px}
-tr.off td{color:var(--text-muted)}
-tr.off td.h{color:var(--text-muted)}
+tr.off td{color:var(--text-muted)}tr.off td.h{color:var(--text-muted)}
 tr.in-progress{background:#7b4daf11}tr.in-progress td.h{color:var(--accent)}
 tr.scheduled td.h{color:var(--text-dim);font-style:italic}
 .footer{margin-top:24px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.5px;line-height:1.6}
@@ -37,27 +35,27 @@ tr.scheduled td.h{color:var(--text-dim);font-style:italic}
 <body><div class="page">
 <a href="../schedule.html" class="back">← Back to team schedule</a>
 <div class="hero"><div class="avatar">JC</div><div><h1>Jaz Cafuir</h1><div class="meta">THL · Mar 30 - Apr 14, 2026</div></div></div>
-<div class="stats"><div class="stat"><div class="v rt">72</div><div class="l">Regular hrs</div></div>
-<div class="stat"><div class="v ot">13.5</div><div class="l">Overtime hrs</div></div>
-<div class="stat"><div class="v">85.5</div><div class="l">Total hrs</div></div></div>
-<div class="todays"><div class="td-card"><h3>Today (Mon 04/13)</h3><div class="h">8h</div><div class="d">scheduled — 14:00-22:00</div></div>
+<div class="stats"><div class="stat"><div class="v rt">88</div><div class="l">Regular hrs</div></div>
+<div class="stat"><div class="v ot">12</div><div class="l">Overtime hrs</div></div>
+<div class="stat"><div class="v">100</div><div class="l">Total hrs</div></div></div>
+<div class="todays"><div class="td-card"><h3>Today (Mon 04/13)</h3><div class="h">8h</div><div class="d">in_progress — 14:00-22:00</div></div>
 <div class="td-card"><h3>Tomorrow (Tue 04/14)</h3><div class="h">0h</div><div class="d">off</div></div></div>
 <table><thead><tr><th>Day</th><th>In</th><th>Out</th><th>Hrs</th><th>Status</th></tr></thead>
-<tbody><tr class=""><td>Mon 03/30</td><td>14:14</td><td>22:15</td><td class="h">8 <span class="raw">(8.02h raw)</span></td><td class="s">actual</td></tr>
-    <tr class=""><td>Tue 03/31</td><td>14:05</td><td>22:07</td><td class="h">8 <span class="raw">(8.03h raw)</span></td><td class="s">actual</td></tr>
+<tbody><tr class=""><td>Mon 03/30</td><td>14:14</td><td>22:15</td><td class="h">8</td><td class="s">actual</td></tr>
+    <tr class=""><td>Tue 03/31</td><td>14:05</td><td>22:07</td><td class="h">8</td><td class="s">actual</td></tr>
     <tr class="off"><td>Wed 04/01</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
     <tr class="off"><td>Thu 04/02</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
-    <tr class=""><td>Fri 04/03</td><td>14:04</td><td>—</td><td class="h">—</td><td class="s">partial — missing OUT</td></tr>
-    <tr class=""><td>Sat 04/04</td><td>13:57</td><td>—</td><td class="h">—</td><td class="s">partial — missing OUT</td></tr>
-    <tr class=""><td>Sun 04/05</td><td>14:00</td><td>22:03</td><td class="h">8 <span class="raw">(8.05h raw)</span></td><td class="s">actual</td></tr>
-    <tr class=""><td>Mon 04/06</td><td>14:02</td><td>22:05</td><td class="h">8 <span class="raw">(8.05h raw)</span></td><td class="s">actual</td></tr>
-    <tr class=""><td>Tue 04/07</td><td>13:57</td><td>22:06</td><td class="h">8 <span class="raw">(8.15h raw)</span></td><td class="s">actual</td></tr>
+    <tr class=""><td>Fri 04/03</td><td>14:04</td><td>22:13</td><td class="h">8</td><td class="s">actual — paid 8h scheduled (actual 8.15h)</td></tr>
+    <tr class=""><td>Sat 04/04</td><td>13:57</td><td>22:00</td><td class="h">8</td><td class="s">actual — paid 8h scheduled (actual 8.05h)</td></tr>
+    <tr class=""><td>Sun 04/05</td><td>14:00</td><td>22:03</td><td class="h">8</td><td class="s">actual — paid 8h scheduled (actual 8.05h)</td></tr>
+    <tr class=""><td>Mon 04/06</td><td>14:02</td><td>22:05</td><td class="h">8</td><td class="s">actual — paid 8h scheduled (actual 8.05h)</td></tr>
+    <tr class=""><td>Tue 04/07</td><td>13:57</td><td>22:06</td><td class="h">8</td><td class="s">actual — paid 8h scheduled (actual 8.15h)</td></tr>
     <tr class="off"><td>Wed 04/08</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
     <tr class="off"><td>Thu 04/09</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
-    <tr class=""><td>Fri 04/10</td><td>06:57</td><td>19:00</td><td class="h">12 <span class="raw">(12.05h raw)</span></td><td class="s">actual</td></tr>
-    <tr class=""><td>Sat 04/11</td><td>06:59</td><td>18:43</td><td class="h">11.5 <span class="raw">(11.73h raw)</span></td><td class="s">actual</td></tr>
-    <tr class=""><td>Sun 04/12</td><td>06:55</td><td>20:08</td><td class="h">13 <span class="raw">(13.22h raw)</span></td><td class="s">actual</td></tr>
-    <tr class="scheduled"><td>Mon 04/13</td><td></td><td>—</td><td class="h">8</td><td class="s">scheduled — 14:00-22:00</td></tr>
+    <tr class=""><td>Fri 04/10</td><td>06:57</td><td>19:00</td><td class="h">12</td><td class="s">actual — paid 12h scheduled (actual 12.05h)</td></tr>
+    <tr class=""><td>Sat 04/11</td><td>06:59</td><td>18:43</td><td class="h">12</td><td class="s">actual — paid 12h scheduled (actual 11.73h)</td></tr>
+    <tr class=""><td>Sun 04/12</td><td>06:55</td><td>20:08</td><td class="h">12</td><td class="s">actual — paid 12h scheduled (actual 13.22h)</td></tr>
+    <tr class="in-progress"><td>Mon 04/13</td><td>14:01</td><td>—</td><td class="h">8</td><td class="s">in progress — 14:00-22:00</td></tr>
     <tr class="off"><td>Tue 04/14</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr></tbody></table>
-<div class="footer">Hours rounded to 0.5 · Generated 2026-04-13T13:59:23</div>
+<div class="footer">Hours = scheduled when actual within 1.5h; else rounded actual · Generated 2026-04-13T14:57:17</div>
 </div></body></html>

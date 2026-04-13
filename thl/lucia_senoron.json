@@ -119,5 +119,6 @@
     "hours": 0,
     "status": "off"
   },
-  "generated": "2026-04-13T13:59:23"
+  "policy": "pay scheduled when actual within 1.5h",
+  "generated": "2026-04-13T14:57:17"
 }

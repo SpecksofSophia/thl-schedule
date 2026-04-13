@@ -17,16 +17,22 @@
       "day": "Tue",
       "in": "07:51",
       "out": "15:21",
-      "hours": 7.5,
-      "status": "actual"
+      "actual_raw": 7.5,
+      "hours": 9,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 9h scheduled (actual 7.5h)"
     },
     {
       "date": "2026-04-01",
       "day": "Wed",
       "in": "07:07",
       "out": "15:13",
-      "hours": 8.1,
-      "status": "actual"
+      "actual_raw": 8.1,
+      "hours": 7,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 7h scheduled (actual 8.1h)"
     },
     {
       "date": "2026-04-02",
@@ -63,24 +69,33 @@
       "day": "Tue",
       "in": "07:00",
       "out": "14:12",
-      "hours": 7.2,
-      "status": "actual"
+      "actual_raw": 7.2,
+      "hours": 7.0,
+      "status": "actual",
+      "paid_as": "rounded_actual",
+      "note": "actual 7.2h rounded to 7.0h (scheduled 10h)"
     },
     {
       "date": "2026-04-08",
       "day": "Wed",
       "in": "07:09",
       "out": "17:05",
-      "hours": 9.93,
-      "status": "actual"
+      "actual_raw": 9.93,
+      "hours": 10,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 10h scheduled (actual 9.93h)"
     },
     {
       "date": "2026-04-09",
       "day": "Thu",
       "in": "07:05",
       "out": "17:00",
-      "hours": 9.92,
-      "status": "actual"
+      "actual_raw": 9.92,
+      "hours": 10,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 10h scheduled (actual 9.92h)"
     },
     {
       "date": "2026-04-10",
@@ -109,15 +124,15 @@
     {
       "date": "2026-04-14",
       "day": "Tue",
-      "hours": 11,
+      "hours": 10,
       "status": "scheduled",
-      "scheduled": "07:00-18:00"
+      "scheduled": "07:00-17:00"
     }
   ],
-  "expected_rt": 46.7,
-  "expected_ot": 6.95,
-  "expected_total": 53.65,
-  "expected_pay": 1256.75,
+  "expected_rt": 46.0,
+  "expected_ot": 7,
+  "expected_total": 53.0,
+  "expected_pay": 1243.0,
   "today": {
     "date": "2026-04-13",
     "day": "Mon",
@@ -127,9 +142,10 @@
   "tomorrow": {
     "date": "2026-04-14",
     "day": "Tue",
-    "hours": 11,
+    "hours": 10,
     "status": "scheduled",
-    "scheduled": "07:00-18:00"
+    "scheduled": "07:00-17:00"
   },
-  "generated": "2026-04-13T13:59:23"
+  "policy": "pay scheduled when actual within 1.5h",
+  "generated": "2026-04-13T14:57:17"
 }

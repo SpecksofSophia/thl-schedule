@@ -11,16 +11,20 @@
       "day": "Mon",
       "in": "14:14",
       "out": "22:15",
-      "hours": 8.02,
-      "status": "actual"
+      "actual_raw": 8.02,
+      "hours": 8,
+      "status": "actual",
+      "paid_as": "scheduled"
     },
     {
       "date": "2026-03-31",
       "day": "Tue",
       "in": "14:05",
       "out": "22:07",
-      "hours": 8.03,
-      "status": "actual"
+      "actual_raw": 8.03,
+      "hours": 8,
+      "status": "actual",
+      "paid_as": "scheduled"
     },
     {
       "date": "2026-04-01",
@@ -38,43 +42,56 @@
       "date": "2026-04-03",
       "day": "Fri",
       "in": "14:04",
-      "out": null,
-      "hours": null,
-      "status": "partial",
-      "note": "missing OUT"
+      "out": "22:13",
+      "actual_raw": 8.15,
+      "hours": 8,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 8h scheduled (actual 8.15h)"
     },
     {
       "date": "2026-04-04",
       "day": "Sat",
       "in": "13:57",
-      "out": null,
-      "hours": null,
-      "status": "partial",
-      "note": "missing OUT"
+      "out": "22:00",
+      "actual_raw": 8.05,
+      "hours": 8,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 8h scheduled (actual 8.05h)"
     },
     {
       "date": "2026-04-05",
       "day": "Sun",
       "in": "14:00",
       "out": "22:03",
-      "hours": 8.05,
-      "status": "actual"
+      "actual_raw": 8.05,
+      "hours": 8,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 8h scheduled (actual 8.05h)"
     },
     {
       "date": "2026-04-06",
       "day": "Mon",
       "in": "14:02",
       "out": "22:05",
-      "hours": 8.05,
-      "status": "actual"
+      "actual_raw": 8.05,
+      "hours": 8,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 8h scheduled (actual 8.05h)"
     },
     {
       "date": "2026-04-07",
       "day": "Tue",
       "in": "13:57",
       "out": "22:06",
-      "hours": 8.15,
-      "status": "actual"
+      "actual_raw": 8.15,
+      "hours": 8,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 8h scheduled (actual 8.15h)"
     },
     {
       "date": "2026-04-08",
@@ -93,30 +110,42 @@
       "day": "Fri",
       "in": "06:57",
       "out": "19:00",
-      "hours": 12.05,
-      "status": "actual"
+      "actual_raw": 12.05,
+      "hours": 12,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 12h scheduled (actual 12.05h)"
     },
     {
       "date": "2026-04-11",
       "day": "Sat",
       "in": "06:59",
       "out": "18:43",
-      "hours": 11.73,
-      "status": "actual"
+      "actual_raw": 11.73,
+      "hours": 12,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 12h scheduled (actual 11.73h)"
     },
     {
       "date": "2026-04-12",
       "day": "Sun",
       "in": "06:55",
       "out": "20:08",
-      "hours": 13.22,
-      "status": "actual"
+      "actual_raw": 13.22,
+      "hours": 12,
+      "status": "actual",
+      "paid_as": "scheduled",
+      "note": "paid 12h scheduled (actual 13.22h)"
     },
     {
       "date": "2026-04-13",
       "day": "Mon",
+      "in": "14:01",
+      "out": null,
+      "actual_raw": 0,
       "hours": 8,
-      "status": "scheduled",
+      "status": "in_progress",
       "scheduled": "14:00-22:00"
     },
     {
@@ -126,15 +155,18 @@
       "status": "off"
     }
   ],
-  "expected_rt": 72,
-  "expected_ot": 13.3,
-  "expected_total": 85.3,
-  "expected_pay": 1930.95,
+  "expected_rt": 88,
+  "expected_ot": 12,
+  "expected_total": 100,
+  "expected_pay": 2226.0,
   "today": {
     "date": "2026-04-13",
     "day": "Mon",
+    "in": "14:01",
+    "out": null,
+    "actual_raw": 0,
     "hours": 8,
-    "status": "scheduled",
+    "status": "in_progress",
     "scheduled": "14:00-22:00"
   },
   "tomorrow": {
@@ -143,5 +175,6 @@
     "hours": 0,
     "status": "off"
   },
-  "generated": "2026-04-13T13:59:23"
+  "policy": "pay scheduled when actual within 1.5h",
+  "generated": "2026-04-13T14:57:17"
 }
