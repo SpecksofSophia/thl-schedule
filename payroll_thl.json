@@ -1,8 +1,8 @@
 {
   "period": "THL Mar 30 - Apr 14, 2026",
   "facility": "THL",
-  "status": "IN PROGRESS",
-  "notes": "Mele + Lucia OUT starting Apr 9 (overnight crisis). May overnight checkpoint Apr 6. Mae OUT Apr 2 (biometrics, Mele covering). May at $21/hr confirmed. Lara on vacation through mid-April.",
+  "status": "RECONCILED",
+  "notes": "Aggregate raw entries below are a partial clock-data audit trail only. Reconciled payroll totals are sourced from the per-staff files in thl/*.json and include scheduled/in-progress coverage for Apr 13-14 used in payroll prep due 04/14 AM. Mele + Lucia OUT starting Apr 9 (overnight crisis). May overnight checkpoint Apr 6. Mae OUT Apr 2 (biometrics, Mele covering). May at $21/hr confirmed. Lara on vacation through mid-April.",
 
   "ot_tracked": {
     "weekly": ["Mele Langa"],
@@ -24,6 +24,23 @@
     "2026-04-06": "May overnight checkpoint — Ricca assessment.",
     "2026-04-09": "Mele + Lucia OUT. Overnight crisis begins.",
     "2026-04-14": "Period ends. Payroll due ~04/15."
+  },
+
+  "reconciled_totals": {
+    "source": "thl/*.json",
+    "basis": "payroll prep snapshot generated 2026-04-13T15:13:53; includes scheduled/in-progress hours for 2026-04-13 and 2026-04-14",
+    "staff": {
+      "Ricca Ilagan": { "rt": 96, "ot": 10, "total": 106, "pay": 2331.0 },
+      "May Rioflorido": { "rt": 103, "ot": 6, "total": 109, "pay": 2352.0 },
+      "Jaz Cafuir": { "rt": 88, "ot": 12, "total": 100, "pay": 2226.0 },
+      "Mele Langa": { "rt": 70, "ot": 8, "total": 78, "pay": 1517.0 },
+      "Mae Maglalang": { "rt": 45.5, "ot": 6, "total": 51.5, "pay": 1199.0 },
+      "Lucia Senoron": { "rt": 0, "ot": 0, "total": 0, "pay": 0.0 }
+    },
+    "totals": {
+      "hours": 444.5,
+      "pay": 9625.0
+    }
   },
 
   "entries": [
