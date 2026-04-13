@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucia Senoron — THL Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0c0e12; --surface:#151820; --surface-raised:#1c2029;
+  --border:#2a2f3a; --text:#e8eaf0; --text-dim:#8891a4; --text-muted:#555d70;
+  --accent:#a04070; --ot:#f05050; --rt:#50c878;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+.back{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;margin-bottom:20px}
+.back:hover{color:var(--text-dim)}
+.hero{display:flex;align-items:center;gap:18px;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--border)}
+.avatar{width:56px;height:56px;border-radius:14px;background:#a0407022;border:2px solid #a0407066;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--accent)}
+.hero h1{font-size:22px;font-weight:700}
+.hero .meta{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:4px;letter-spacing:0.5px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center}
+.stat .v{font-size:26px;font-weight:800;line-height:1}
+.stat .v.ot{color:var(--ot)}.stat .v.rt{color:var(--rt)}
+.stat .l{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.2px;color:var(--text-muted);margin-top:6px;text-transform:uppercase}
+.todays{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.td-card{background:var(--surface-raised);border:1px solid #a0407044;border-radius:10px;padding:14px}
+.td-card h3{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:8px}
+.td-card .h{font-size:22px;font-weight:700}
+.td-card .d{font-size:12px;color:var(--text-dim);margin-top:4px}
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border);font-size:13px}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border)}
+th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:var(--surface-raised)}
+td.h{text-align:right;font-weight:600;color:var(--accent)}
+td.s{color:var(--text-dim);font-size:12px}
+tr.off td{color:var(--text-muted)}
+tr.off td.h{color:var(--text-muted)}
+tr.in-progress{background:#a0407011}
+tr.in-progress td.h{color:var(--accent)}
+tr.scheduled td.h{color:var(--text-dim);font-style:italic}
+.footer{margin-top:24px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.5px}
+</style>
+</head>
+<body>
+<div class="page">
+  <a href="schedule.html" class="back">← Back to team schedule</a>
+  <div class="hero">
+    <div class="avatar">LS</div>
+    <div>
+      <h1>Lucia Senoron</h1>
+      <div class="meta">THL · Mar 30 - Apr 14, 2026 · $21.00/hr · OT daily</div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="v rt">0</div><div class="l">Regular hrs</div></div>
+    <div class="stat"><div class="v ot">0</div><div class="l">Overtime hrs</div></div>
+    <div class="stat"><div class="v">$0.00</div><div class="l">Expected pay</div></div>
+  </div>
+  <div class="todays">
+    <div class="td-card"><h3>Today (Mon 04/13)</h3><div class="h">0h</div><div class="d">off</div></div>
+    <div class="td-card"><h3>Tomorrow (Tue 04/14)</h3><div class="h">0h</div><div class="d">off</div></div>
+  </div>
+  <table>
+    <thead><tr><th>Day</th><th>In</th><th>Out</th><th>Hrs</th><th>Status</th></tr></thead>
+    <tbody>
+    <tr class="off"><td>Mon 03/30</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Tue 03/31</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Wed 04/01</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Thu 04/02</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Fri 04/03</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Sat 04/04</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Sun 04/05</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Mon 04/06</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Tue 04/07</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Wed 04/08</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Thu 04/09</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Fri 04/10</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Sat 04/11</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Sun 04/12</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Mon 04/13</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    <tr class="off"><td>Tue 04/14</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
+    </tbody>
+  </table>
+  <div class="footer">Total 0h · RT 0h × $21.00 + OT 0h × $31.50 · Generated 2026-04-13T13:59:23</div>
+</div>
+</body>
+</html>
