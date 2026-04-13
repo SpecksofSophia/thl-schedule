@@ -1,17 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jaz Cafuir — THL Schedule</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Jaz Cafuir — THL Schedule</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#0c0e12; --surface:#151820; --surface-raised:#1c2029;
-  --border:#2a2f3a; --text:#e8eaf0; --text-dim:#8891a4; --text-muted:#555d70;
-  --accent:#7b4daf; --ot:#f05050; --rt:#50c878;
-}
+:root{--bg:#0c0e12;--surface:#151820;--surface-raised:#1c2029;--border:#2a2f3a;--text:#e8eaf0;--text-dim:#8891a4;--text-muted:#555d70;--accent:#7b4daf;--ot:#f05050;--rt:#50c878}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh}
 .page{max-width:860px;margin:0 auto;padding:28px 20px 60px}
@@ -34,57 +25,39 @@ body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-
 table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border);font-size:13px}
 th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border)}
 th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);background:var(--surface-raised)}
-td.h{text-align:right;font-weight:600;color:var(--accent)}
+td.h{text-align:right;font-weight:600;color:var(--accent);white-space:nowrap}
 td.s{color:var(--text-dim);font-size:12px}
+.raw{font-size:10px;color:var(--text-muted);font-weight:400;margin-left:4px}
 tr.off td{color:var(--text-muted)}
 tr.off td.h{color:var(--text-muted)}
-tr.in-progress{background:#7b4daf11}
-tr.in-progress td.h{color:var(--accent)}
+tr.in-progress{background:#7b4daf11}tr.in-progress td.h{color:var(--accent)}
 tr.scheduled td.h{color:var(--text-dim);font-style:italic}
-.footer{margin-top:24px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.5px}
-</style>
-</head>
-<body>
-<div class="page">
-  <a href="schedule.html" class="back">← Back to team schedule</a>
-  <div class="hero">
-    <div class="avatar">JC</div>
-    <div>
-      <h1>Jaz Cafuir</h1>
-      <div class="meta">THL · Mar 30 - Apr 14, 2026 · $21.00/hr · OT daily</div>
-    </div>
-  </div>
-  <div class="stats">
-    <div class="stat"><div class="v rt">72</div><div class="l">Regular hrs</div></div>
-    <div class="stat"><div class="v ot">13.3</div><div class="l">Overtime hrs</div></div>
-    <div class="stat"><div class="v">$1,930.95</div><div class="l">Expected pay</div></div>
-  </div>
-  <div class="todays">
-    <div class="td-card"><h3>Today (Mon 04/13)</h3><div class="h">8h</div><div class="d">scheduled — 14:00-22:00</div></div>
-    <div class="td-card"><h3>Tomorrow (Tue 04/14)</h3><div class="h">0h</div><div class="d">off</div></div>
-  </div>
-  <table>
-    <thead><tr><th>Day</th><th>In</th><th>Out</th><th>Hrs</th><th>Status</th></tr></thead>
-    <tbody>
-    <tr class=""><td>Mon 03/30</td><td>14:14</td><td>22:15</td><td class="h">8.02</td><td class="s">actual</td></tr>
-    <tr class=""><td>Tue 03/31</td><td>14:05</td><td>22:07</td><td class="h">8.03</td><td class="s">actual</td></tr>
+.footer{margin-top:24px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:0.5px;line-height:1.6}
+</style></head>
+<body><div class="page">
+<a href="../schedule.html" class="back">← Back to team schedule</a>
+<div class="hero"><div class="avatar">JC</div><div><h1>Jaz Cafuir</h1><div class="meta">THL · Mar 30 - Apr 14, 2026 · $21.00/hr · OT daily</div></div></div>
+<div class="stats"><div class="stat"><div class="v rt">72</div><div class="l">Regular hrs</div></div>
+<div class="stat"><div class="v ot">13.5</div><div class="l">Overtime hrs</div></div>
+<div class="stat"><div class="v">$1,930.95</div><div class="l">Expected pay</div></div></div>
+<div class="todays"><div class="td-card"><h3>Today (Mon 04/13)</h3><div class="h">8h</div><div class="d">scheduled — 14:00-22:00</div></div>
+<div class="td-card"><h3>Tomorrow (Tue 04/14)</h3><div class="h">0h</div><div class="d">off</div></div></div>
+<table><thead><tr><th>Day</th><th>In</th><th>Out</th><th>Hrs</th><th>Status</th></tr></thead>
+<tbody><tr class=""><td>Mon 03/30</td><td>14:14</td><td>22:15</td><td class="h">8 <span class="raw">(8.02h raw)</span></td><td class="s">actual</td></tr>
+    <tr class=""><td>Tue 03/31</td><td>14:05</td><td>22:07</td><td class="h">8 <span class="raw">(8.03h raw)</span></td><td class="s">actual</td></tr>
     <tr class="off"><td>Wed 04/01</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
     <tr class="off"><td>Thu 04/02</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
-    <tr class=""><td>Fri 04/03</td><td>14:04</td><td>—</td><td class="h">0</td><td class="s">partial — missing OUT</td></tr>
-    <tr class=""><td>Sat 04/04</td><td>13:57</td><td>—</td><td class="h">0</td><td class="s">partial — missing OUT</td></tr>
-    <tr class=""><td>Sun 04/05</td><td>14:00</td><td>22:03</td><td class="h">8.05</td><td class="s">actual</td></tr>
-    <tr class=""><td>Mon 04/06</td><td>14:02</td><td>22:05</td><td class="h">8.05</td><td class="s">actual</td></tr>
-    <tr class=""><td>Tue 04/07</td><td>13:57</td><td>22:06</td><td class="h">8.15</td><td class="s">actual</td></tr>
+    <tr class=""><td>Fri 04/03</td><td>14:04</td><td>—</td><td class="h">—</td><td class="s">partial — missing OUT</td></tr>
+    <tr class=""><td>Sat 04/04</td><td>13:57</td><td>—</td><td class="h">—</td><td class="s">partial — missing OUT</td></tr>
+    <tr class=""><td>Sun 04/05</td><td>14:00</td><td>22:03</td><td class="h">8 <span class="raw">(8.05h raw)</span></td><td class="s">actual</td></tr>
+    <tr class=""><td>Mon 04/06</td><td>14:02</td><td>22:05</td><td class="h">8 <span class="raw">(8.05h raw)</span></td><td class="s">actual</td></tr>
+    <tr class=""><td>Tue 04/07</td><td>13:57</td><td>22:06</td><td class="h">8 <span class="raw">(8.15h raw)</span></td><td class="s">actual</td></tr>
     <tr class="off"><td>Wed 04/08</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
     <tr class="off"><td>Thu 04/09</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
-    <tr class=""><td>Fri 04/10</td><td>06:57</td><td>19:00</td><td class="h">12.05</td><td class="s">actual</td></tr>
-    <tr class=""><td>Sat 04/11</td><td>06:59</td><td>18:43</td><td class="h">11.73</td><td class="s">actual</td></tr>
-    <tr class=""><td>Sun 04/12</td><td>06:55</td><td>20:08</td><td class="h">13.22</td><td class="s">actual</td></tr>
+    <tr class=""><td>Fri 04/10</td><td>06:57</td><td>19:00</td><td class="h">12 <span class="raw">(12.05h raw)</span></td><td class="s">actual</td></tr>
+    <tr class=""><td>Sat 04/11</td><td>06:59</td><td>18:43</td><td class="h">11.5 <span class="raw">(11.73h raw)</span></td><td class="s">actual</td></tr>
+    <tr class=""><td>Sun 04/12</td><td>06:55</td><td>20:08</td><td class="h">13 <span class="raw">(13.22h raw)</span></td><td class="s">actual</td></tr>
     <tr class="scheduled"><td>Mon 04/13</td><td></td><td>—</td><td class="h">8</td><td class="s">scheduled — 14:00-22:00</td></tr>
-    <tr class="off"><td>Tue 04/14</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr>
-    </tbody>
-  </table>
-  <div class="footer">Total 85.3h · RT 72h × $21.00 + OT 13.3h × $31.50 · Generated 2026-04-13T13:59:23</div>
-</div>
-</body>
-</html>
+    <tr class="off"><td>Tue 04/14</td><td>—</td><td>—</td><td class="h">0</td><td>off</td></tr></tbody></table>
+<div class="footer">Hours rounded to 0.5 for payroll · Total 85.5h · RT 72h × $21.00 + OT 13.5h × $31.50 · Generated 2026-04-13T13:59:23</div>
+</div></body></html>
