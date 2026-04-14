@@ -92,13 +92,9 @@
     {
       "date": "2026-04-07",
       "day": "Tue",
-      "in": "07:00",
-      "out": "14:00",
-      "actual_raw": 7.0,
-      "hours": 7.0,
-      "status": "actual",
-      "paid_as": "rounded_actual",
-      "note": "unscheduled — paid actual 7.0h"
+      "hours": 0,
+      "status": "off",
+      "note": "removed 04/14 — punches at 7-14 belonged to Mae, not May (data attribution error)"
     },
     {
       "date": "2026-04-08",
@@ -168,10 +164,10 @@
       "scheduled": "14:00-22:00"
     }
   ],
-  "expected_rt": 98.0,
+  "expected_rt": 91.0,
   "expected_ot": 6,
-  "expected_total": 104.0,
-  "expected_pay": 2247.0,
+  "expected_total": 97.0,
+  "expected_pay": 2100.0,
   "today": {
     "date": "2026-04-13",
     "day": "Mon",
